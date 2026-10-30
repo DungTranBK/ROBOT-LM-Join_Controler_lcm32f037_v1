@@ -1,0 +1,137 @@
+*** Using Compiler 'V6.24', folder: 'D:\Program Files\Kei_v5\ARM\ARMCLANG\Bin'
+Rebuild target 'LCM32F037_BLDC'
+Source/flash_eeprom.c(12): warning: In file included from..../SDK/inc\lcm32f037_flash.h(3): warning: non-portable path to file '"lcm32f037.h"'; specified path differs in case from file name on disk [-Wnonportable-include-path]
+    3 | #include "LCM32F037.h"
+      |          ^~~~~~~~~~~~~
+      |          "lcm32f037.h"
+1 warning generated.
+compiling flash_eeprom.c...
+compiling trig_table.c...
+compiling uart_1wire.c...
+compiling main.c...
+compiling lcm32f037_dma.c...
+compiling protocol.c...
+compiling system_lcm32f037.c...
+SDK/src/lcm32f037_adc.c(38): warning: unused parameter 'ADCx' [-Wunused-parameter]
+   38 | void ADC_Cmd(ADC_TypeDef *ADCx, FunctionalState State)
+      |                           ^
+SDK/src/lcm32f037_adc.c(69): warning: unused parameter 'ADCx' [-Wunused-parameter]
+   69 | void ADC_Init(ADC_TypeDef *ADCx, ADC_InitTypeDef *ADC_InitStruct)
+      |                            ^
+SDK/src/lcm32f037_adc.c(216): warning: unused parameter 'ADCx' [-Wunused-parameter]
+  216 | void ADC_AutoPowerOffCmd(ADC_TypeDef *ADCx, FunctionalState NewState)
+      |                                       ^
+SDK/src/lcm32f037_adc.c(233): warning: unused parameter 'ADCx' [-Wunused-parameter]
+  233 | void ADC_AnalogWatchdogCmd(ADC_TypeDef *ADCx, FunctionalState NewState)
+      |                                         ^
+SDK/src/lcm32f037_adc.c(251): warning: unused parameter 'ADCx' [-Wunused-parameter]
+  251 | void ADC_AnalogWatchdogThresholdsConfig(ADC_TypeDef *ADCx, uint16_t HighThreshold, uint16_t LowThreshold)
+      |                                                      ^
+SDK/src/lcm32f037_adc.c(261): warning: unused parameter 'ADCx' [-Wunused-parameter]
+  261 | void ADC_AnalogWatchdogSingleChannelConfig(ADC_TypeDef *ADCx, uint32_t ADC_AnalogWatchdog_Channel)
+      |                                                         ^
+SDK/src/lcm32f037_adc.c(282): warning: unused parameter 'ADCx' [-Wunused-parameter]
+  282 | void ADC_AnalogWatchdogSingleChannelCmd(ADC_TypeDef *ADCx, FunctionalState NewState)
+      |                                                      ^
+SDK/src/lcm32f037_adc.c(339): warning: unused parameter 'ADCx' [-Wunused-parameter]
+  339 | void ADC_ChannelConfig(ADC_TypeDef *ADCx, uint32_t ADC_Channel, uint32_t ADC_ConverTime, uint32_t ADC_AdjustTime, uint32_t ADC_SampleTime)
+      |                                     ^
+SDK/src/lcm32f037_adc.c(339): warning: unused parameter 'ADC_AdjustTime' [-Wunused-parameter]
+  339 | void ADC_ChannelConfig(ADC_TypeDef *ADCx, uint32_t ADC_Channel, uint32_t ADC_ConverTime, uint32_t ADC_AdjustTime, uint32_t ADC_SampleTime)
+      |                                                                                                   ^
+SDK/src/lcm32f037_adc.c(365): warning: unused parameter 'ADCx' [-Wunused-parameter]
+  365 | void ADC_StopOfConversion(ADC_TypeDef *ADCx)
+      |                                        ^
+SDK/src/lcm32f037_adc.c(380): warning: unused parameter 'ADCx' [-Wunused-parameter]
+  380 | void ADC_StartOfConversion(ADC_TypeDef *ADCx)
+      |                                         ^
+SDK/src/lcm32f037_adc.c(393): warning: unused parameter 'ADCx' [-Wunused-parameter]
+  393 | uint16_t ADC_GetConversionValue(ADC_TypeDef *ADCx)
+      |                                              ^
+SDK/src/lcm32f037_adc.c(410): warning: unused parameter 'ADCx' [-Wunused-parameter]
+  410 | void ADC_CloseAdc(ADC_TypeDef *ADCx)
+      |                                ^
+SDK/src/lcm32f037_adc.c(428): warning: unused parameter 'ADCx' [-Wunused-parameter]
+  428 | void ADC_ITConfig(ADC_TypeDef *ADCx, uint32_t ADC_IT, FunctionalState NewState)
+      |                                ^
+SDK/src/lcm32f037_adc.c(446): warning: unused parameter 'ADCx' [-Wunused-parameter]
+  446 | FlagStatus ADC_GetFlagStatus(ADC_TypeDef *ADCx, uint32_t ADC_FLAG)
+      |                                           ^
+SDK/src/lcm32f037_adc.c(475): warning: unused parameter 'ADCx' [-Wunused-parameter]
+  475 | void ADC_ClearFlag(ADC_TypeDef *ADCx, uint32_t ADC_FLAG)
+      |                                 ^
+SDK/src/lcm32f037_adc.c(489): warning: unused parameter 'ADCx' [-Wunused-parameter]
+  489 | ITStatus ADC_GetITStatus(ADC_TypeDef *ADCx, uint32_t ADC_IT)
+      |                                       ^
+SDK/src/lcm32f037_adc.c(519): warning: unused parameter 'ADCx' [-Wunused-parameter]
+  519 | void ADC_ClearITPendingBit(ADC_TypeDef *ADCx, uint32_t ADC_IT)
+      |                                         ^
+SDK/src/lcm32f037_adc.c(531): warning: unused parameter 'ADCx' [-Wunused-parameter]
+  531 | void ADC_VrefintSelect(ADC_TypeDef *ADCx, uint32_t ADC_Vref)
+      |                                     ^
+SDK/src/lcm32f037_adc.c(622): warning: comparison of integers of different signs: 'int' and 'unsigned int' [-Wsign-compare]
+  622 |   if (temperatureNormalADC4V_3V3 != 0xFFFFFFFF)
+      |       ~~~~~~~~~~~~~~~~~~~~~~~~~~ ^  ~~~~~~~~~~
+SDK/src/lcm32f037_adc.c(642): warning: variable 'temperatureHighADC' is used uninitialized whenever switch default is taken [-Wsometimes-uninitialized]
+  642 |     default:
+      |     ^~~~~~~
+SDK/src/lcm32f037_adc.c(645): note: uninitialized use occurs here
+  645 |     slope = ((temperatureHighADC - temperatureNormalADC) * 100) / (temperatureHigh - temperatureNormal);
+      |               ^~~~~~~~~~~~~~~~~~
+SDK/src/lcm32f037_adc.c(615): note: initialize the variable 'temperatureHighADC' to silence this warning
+  615 |   int slope, temperatureNormal, temperatureHigh, temperatureNormalADC, temperatureHighADC, temperatureNow;
+      |                                                                                          ^
+      |                                                                                           = 0
+SDK/src/lcm32f037_adc.c(642): warning: variable 'temperatureNormalADC' is used uninitialized whenever switch default is taken [-Wsometimes-uninitialized]
+  642 |     default:
+      |     ^~~~~~~
+SDK/src/lcm32f037_adc.c(645): note: uninitialized use occurs here
+  645 |     slope = ((temperatureHighADC - temperatureNormalADC) * 100) / (temperatureHigh - temperatureNormal);
+      |                                    ^~~~~~~~~~~~~~~~~~~~
+SDK/src/lcm32f037_adc.c(615): note: initialize the variable 'temperatureNormalADC' to silence this warning
+  615 |   int slope, temperatureNormal, temperatureHigh, temperatureNormalADC, temperatureHighADC, temperatureNow;
+      |                                                                      ^
+      |                                                                       = 0
+22 warnings generated.
+compiling lcm32f037_adc.c...
+compiling motor_foc.c...
+SDK/src/lcm32f037_rcc.c(51): warning: In file included from..../SDK/inc\lcm32f037_flash.h(3): warning: non-portable path to file '"lcm32f037.h"'; specified path differs in case from file name on disk [-Wnonportable-include-path]
+    3 | #include "LCM32F037.h"
+      |          ^~~~~~~~~~~~~
+      |          "lcm32f037.h"
+1 warning generated.
+compiling lcm32f037_rcc.c...
+compiling lcm32f037_tim.c...
+compiling lcm32f037_opa.c...
+SDK/src/lcm32f037_ssp.c(29): warning: unused parameter 'SPIx' [-Wunused-parameter]
+   29 | void SPI_DeInit(SPI_TypeDef *SPIx)
+      |                              ^
+1 warning generated.
+compiling lcm32f037_ssp.c...
+assembling startup_lcm32f037.s...
+compiling lcm32f037_gpio.c...
+SDK/src/lcm32f037_pwr.c(65): warning: unused parameter 'PWR_Regulator' [-Wunused-parameter]
+   65 | void PWR_EnterUR_STOPMode(uint32_t PWR_Regulator, uint32_t PWR_STOPEntry)
+      |                                    ^
+SDK/src/lcm32f037_pwr.c(101): warning: unused parameter 'PWR_Regulator' [-Wunused-parameter]
+  101 | void PWR_EnterSTOPMode(uint32_t PWR_Regulator, uint32_t PWR_STOPEntry)
+      |                                 ^
+SDK/src/lcm32f037_pwr.c(129): warning: unused parameter 'PWR_Regulator' [-Wunused-parameter]
+  129 | void PWR_EnterLowPowerSTOPMode(uint32_t PWR_Regulator, uint32_t PWR_STOPEntry)
+      |                                         ^
+3 warnings generated.
+compiling lcm32f037_pwr.c...
+SDK/src/lcm32f037_flash.c(17): warning: In file included from..../SDK/inc\lcm32f037_flash.h(3): warning: non-portable path to file '"lcm32f037.h"'; specified path differs in case from file name on disk [-Wnonportable-include-path]
+    3 | #include "LCM32F037.h"
+      |          ^~~~~~~~~~~~~
+      |          "lcm32f037.h"
+SDK/src/lcm32f037_flash.c(339): warning: explicitly assigning value of variable of type 'uint16_t' (aka 'unsigned short') to itself [-Wself-assign]
+  339 |     rdptmp = rdptmp;
+      |     ~~~~~~ ^ ~~~~~~
+2 warnings generated.
+compiling lcm32f037_flash.c...
+linking...
+Program Size: Code=16508 RO-data=1376 RW-data=4 ZI-data=2716  
+FromELF: creating hex file...
+".\Objects\LCM32F037_BLDC.axf" - 0 Error(s), 30 Warning(s).
+Build Time Elapsed:  00:00:02

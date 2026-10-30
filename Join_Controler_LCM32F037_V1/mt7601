@@ -1,0 +1,80 @@
+/**
+ * @file mt6701.c
+ * @brief MagnTek MT6701 14-bit Magnetic Sensor Driver implementation
+ *        Matching code_da_doc.bin 0x08004158 & 0x080025B0
+ */
+
+#include "mt6701.h"
+#include "lcm32f037.h"
+#include "bldc_protocol.h"
+#include "trig_table.h"
+
+volatile uint16_t g_mt6701_raw_angle = 0;  /* 0x20000074 */
+volatile int32_t  g_rotor_elec_angle = 0;  /* 0x20000014 */
+volatile uint16_t g_zero_angle_offset = 0; /* 0x20000070 */
+
+static int16_t  s_last_angle = 0;
+static int16_t  s_turns_count = 0;
+
+void mt6701_init(void) {
+    /* SPI1 Initialization: 16-bit Master Mode, CPOL=0, CPHA=1 */
+    SPI1->CR1 = (1 << 11) | (1 << 9) | (1 << 8) | (1 << 2) | (1 << 0); /* DFF=16bit, SSM=1, SSI=1, MSTR=1, CPHA=1 */
+    SPI1->CR2 = 0;
+    SPI1->CR1 |= (1 << 6); /* SPE: SPI Enable */
+}
+
+/**
+ * @brief Reads 16-bit frame over SPI1, extracts 14-bit angle
+ *        Disassembly at 0x08004158:
+ *        0x08004160: bl SPI_I2S_SendData(SPI1, 0xFFFF)
+ *        0x08004168: bl SPI_I2S_GetFlagStatus(SPI1, RXNE)
+ *        0x08004172: bl SPI_I2S_ReceiveData(SPI1)
+ *        0x08004176: lsrs r0, r0, #2
+ */
+uint16_t mt6701_read_raw(void) {
+    SPI1->DR = 0xFFFF;
+    while ((SPI1->SR & 0x04) == 0); /* Wait for RXNE */
+    uint16_t rx = (uint16_t)(SPI1->DR);
+    return (rx >> 2); /* Discard status/parity bits, return 14-bit angle (0..16383) */
+}
+
+/**
+ * @brief Updates position, velocity, and FOC electrical angle
+ *        Disassembly at 0x080025B0 & 0x08002708
+ */
+void mt6701_update_angle_and_speed(void) {
+    g_mt6701_raw_angle = mt6701_read_raw();
+
+    /* Multi-turn position tracking */
+    int16_t raw_1024 = (int16_t)(g_mt6701_raw_angle >> 4); /* Scale 16384 -> 1024 */
+    int16_t delta = raw_1024 - s_last_angle;
+
+    if (delta > 512) {
+        s_turns_count--;
+    } else if (delta < -512) {
+        s_turns_count++;
+    }
+    s_last_angle = raw_1024;
+
+    /* Single-turn position for Control Table (0..1023) */
+    g_control_table.current_position = (uint16_t)(raw_1024 & 0x03FF);
+
+    /* Electrical Angle calculation for FOC:
+     * theta_m = (raw_angle - zero_offset)
+     * theta_e = (theta_m * POLE_PAIRS) mapped to 0 .. 62831 (2*PI*10000)
+     */
+    int32_t mech_diff = (int32_t)g_mt6701_raw_angle - (int32_t)g_zero_angle_offset;
+    while (mech_diff < 0) {
+        mech_diff += 16384;
+    }
+    while (mech_diff >= 16384) {
+        mech_diff -= 16384;
+    }
+
+    /* 10 pole pairs (as seen in disassembly constant 10 at 0x08002724) */
+    int32_t elec = (mech_diff * 10) % 16384;
+    g_rotor_elec_angle = (elec * TRIG_TWO_PI) / 16384;
+    if (g_rotor_elec_angle >= TRIG_TWO_PI) {
+        g_rotor_elec_angle -= TRIG_TWO_PI;
+    }
+}

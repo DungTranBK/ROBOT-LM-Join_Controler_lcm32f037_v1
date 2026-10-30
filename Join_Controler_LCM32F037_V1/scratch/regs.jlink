@@ -1,0 +1,7 @@
+device LCM32F037
+si SWD
+speed 4000
+connect
+h
+regs
+q

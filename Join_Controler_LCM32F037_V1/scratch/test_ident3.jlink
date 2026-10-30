@@ -1,0 +1,5 @@
+device STSPIN32G4
+si SWD
+speed 2000
+connect
+q

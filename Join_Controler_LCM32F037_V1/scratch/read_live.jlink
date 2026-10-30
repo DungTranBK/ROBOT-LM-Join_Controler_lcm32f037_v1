@@ -1,0 +1,6 @@
+device LCM32F037
+si SWD
+speed 4000
+connect
+mem 0x200000AC, 50
+q

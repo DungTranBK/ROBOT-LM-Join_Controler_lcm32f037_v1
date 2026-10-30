@@ -1,0 +1,6 @@
+device Cortex-M0
+si SWD
+speed 4000
+connect
+mem32 0xE000ED00 1
+q

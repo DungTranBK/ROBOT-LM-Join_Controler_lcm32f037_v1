@@ -1,0 +1,5 @@
+device STM32G431KB
+si SWD
+speed 2000
+connect
+q
