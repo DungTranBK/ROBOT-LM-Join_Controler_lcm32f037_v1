@@ -27,12 +27,20 @@ static uint16_t s_dbg_ms_cnt = 0; /* counts 1 ms ticks, resets at 500 */
 #endif
 
 /* Bus voltage: ADC[4] (CH11) * scale - offset -> 0.1 V units */
+#if MOTOR_USE_HALL_MT9102
+#define VBUS_ADC_SCALE 0.134309995919466f
+#else
 #define VBUS_ADC_SCALE 0.10744799673557281f
+#endif
 #define VBUS_ADC_OFFSET 5U
 
 /* NTC divider: R = x * R_PULLUP / (ADC_FULL - x), x = ADC[2] (CH2) */
 #define NTC_R_PULLUP 10000.0f
+#if MOTOR_USE_HALL_MT9102
+#define NTC_ADC_FULL_SCALE 4095.0f
+#else
 #define NTC_ADC_FULL_SCALE 5119.0f
+#endif
 #define NTC_TEMP_OFFSET 40 /* table entry i = (i - 40) degC               */
 #define NTC_TEMP_NOT_FOUND                                                     \
   (-100) /* sentinel while scanning the table           */
@@ -41,10 +49,15 @@ static uint16_t s_dbg_ms_cnt = 0; /* counts 1 ms ticks, resets at 500 */
 
 /* Protection limits */
 #define OVERHEAT_LIMIT_DEGC                                                    \
-  DEFAULT_TEMP_UPPER_LIMIT                  /* 70 degC                        */
+  DEFAULT_TEMP_UPPER_LIMIT /* 70 degC                        */
+#if MOTOR_USE_HALL_MT9102
+#define CURRENT_SCALE_MA 4.070003628730774f /* ADC counts -> mA (5.0V Vref) */
+#define OVERCURRENT_LIMIT_MA 600            /* 1000 mA (1.0 A)                */
+#else
 #define CURRENT_SCALE_MA 3.256002902984619f /* ADC counts -> mA */
 #define OVERCURRENT_LIMIT_MA 0x5DC          /* 1500 mA                        */
-#define OVERCURRENT_TIME_MS 0x7D0           /* 2000 ms above the limit        */
+#endif
+#define OVERCURRENT_TIME_MS 0x7D0 /* 2000 ms above the limit        */
 
 void motor_monitor_poll(void) {
   if (bsp_systick_take_1ms_flag()) {

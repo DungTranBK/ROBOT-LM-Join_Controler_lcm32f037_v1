@@ -1,7 +1,8 @@
 /**
  * @file foc_config.h
  * @brief [Middleware] FOC carrier/PWM parameters and per-joint motor physical
- * configuration (HIP vs KNEE) shared by the control code and application.
+ * configuration (HIP vs KNEE vs NECK) shared by the control code and
+ * application.
  */
 
 #ifndef __FOC_CONFIG_H
@@ -13,15 +14,20 @@ extern "C" {
 
 /* ============================================================================
  * 1. Joint Type Selector
- *    - JOINT_TYPE_HIP  (0): EC4012 Hip Actuator  (10 PP, i = 7.5:1, normal U/V)
- *    - JOINT_TYPE_KNEE (1): Knee Joint Actuator  (16 PP, i = 9.0:1, invert U/V)
+ *    - JOINT_TYPE_HIP  (0): EC4012 Hip Actuator  (10 PP, i = 7.5:1, MT6701 SPI,
+ * normal U/V)
+ *    - JOINT_TYPE_KNEE (1): Knee Joint Actuator  (16 PP, i = 9.0:1, MT6701 SPI,
+ * invert U/V)
+ *    - JOINT_TYPE_NECK (2): Neck Joint Actuator  ( 7 PP, i = 1.0:1, Dual MT9102
+ * Hall ADC, normal U/V)
  * ============================================================================
  */
 #define JOINT_TYPE_HIP 0
 #define JOINT_TYPE_KNEE 1
+#define JOINT_TYPE_NECK 2
 
 #ifndef MOTOR_JOINT_TYPE
-#define MOTOR_JOINT_TYPE JOINT_TYPE_HIP
+#define MOTOR_JOINT_TYPE JOINT_TYPE_NECK
 #endif
 
 /* ============================================================================
@@ -83,6 +89,7 @@ extern "C" {
 #define FOC_INVERT_PHASE_UV 0
 #define MOTOR_GEAR_RATIO_NUM 15 /* EC4012 gearbox ratio = 15 / 2 = 7.5 : 1 */
 #define MOTOR_GEAR_RATIO_DEN 2
+#define MOTOR_USE_HALL_MT9102 0 /* 0 = MT6701 SPI encoder */
 
 /* Per-motor maximum MIT Impedance gains at output shaft (read-only RAM
  * 0x32..0x35) */
@@ -147,6 +154,7 @@ extern "C" {
 #define FOC_INVERT_PHASE_UV 1
 #define MOTOR_GEAR_RATIO_NUM 9 /* Knee gearbox ratio = 9 / 1 = 9.0 : 1 */
 #define MOTOR_GEAR_RATIO_DEN 1
+#define MOTOR_USE_HALL_MT9102 0 /* 0 = MT6701 SPI encoder */
 
 #define MOTOR_KP_MAX 40000U     /* Max Kp: 40.000 N.m/rad */
 #define MOTOR_KD_MAX 260U       /* Max Kd:  0.260 N.m.s/rad */
@@ -160,8 +168,46 @@ extern "C" {
 #define SI_TAU_TO_IQ_NUM 167
 #define SI_TAU_TO_IQ_DEN 1000
 
+#elif (MOTOR_JOINT_TYPE == JOINT_TYPE_NECK)
+/* ----------------------------------------------------------------------------
+ * [JOINT_TYPE_NECK] Direct-Drive Neck Actuator (DJI BLDC + Dual MT9102 Hall):
+ *
+ * 1. Physical parameters:
+ *    - Pole pairs         : 7 (14 magnet poles)
+ *    - Phase U/V wiring   : Normal (FOC_INVERT_PHASE_UV = 0)
+ *    - Gearbox ratio      : i = 1 / 1 = 1.0 : 1 (Direct-drive, no gearbox)
+ *    - Angle sensor       : Dual MT9102 linear Hall sensors (ADC CH3/CH4)
+ *
+ * 2. Direct-drive SI -> Rotor fixed-point conversion (i = 1.0:1):
+ *    - 1 rad at output shaft   = 1.0 * 1024 / (2*pi) = 162.9746 rotor_counts
+ *    - 1 rad/s at output shaft = 1.0 * 60 / (2*pi)   = 9.5493 rotor_RPM
+ *    - Normalized torque scale (300 Iq_counts full scale):
+ *        Kp_rotor = Kp_SI * (300 / 162.9746) = Kp_SI * 18408 / 10000
+ *        Kd_rotor = Kd_SI * (300 / 9.5493)   = Kd_SI * 31416 / 1000
+ *        tau_iq   = tau_mNm * 300 / 1000
+ * ----------------------------------------------------------------------------
+ */
+#define MOTOR_POLE_PAIRS 7 /* Neck BLDC: 7 pole pairs */
+#define FOC_INVERT_PHASE_UV 0
+#define MOTOR_GEAR_RATIO_NUM 1 /* Direct-drive: ratio = 1 / 1 = 1.0 : 1 */
+#define MOTOR_GEAR_RATIO_DEN 1
+#define MOTOR_USE_HALL_MT9102 1 /* 1 = Dual MT9102 linear Hall via ADC */
+
+#define MOTOR_KP_MAX 3000U     /* Max Kp: 3.000 N.m/rad (direct drive) */
+#define MOTOR_KD_MAX 100U      /* Max Kd: 0.100 N.m.s/rad (direct drive) */
+#define MOTOR_DEFAULT_KP 1500U /* Default Kp: 1.500 N.m/rad (~0.92 Iq/count) */
+#define MOTOR_DEFAULT_KD 64U   /* Default Kd: 0.064 N.m.s/rad (~0.36 Iq/RPM) */
+
+#define SI_KP_TO_ROTOR_NUM 9600U
+#define SI_KP_TO_ROTOR_DEN 10000U
+#define SI_KD_TO_ROTOR_NUM 5625U
+#define SI_KD_TO_ROTOR_DEN 1000U
+#define SI_TAU_TO_IQ_NUM 300 /* = IQ_LIMIT */
+#define SI_TAU_TO_IQ_DEN 1000
+
 #else
-#error "Invalid MOTOR_JOINT_TYPE: must be JOINT_TYPE_HIP or JOINT_TYPE_KNEE"
+#error                                                                         \
+    "Invalid MOTOR_JOINT_TYPE: must be JOINT_TYPE_HIP, JOINT_TYPE_KNEE, or JOINT_TYPE_NECK"
 #endif
 
 #define MOTOR_HAS_GEARBOX (MOTOR_GEAR_RATIO_NUM != MOTOR_GEAR_RATIO_DEN)
@@ -178,6 +224,10 @@ extern "C" {
  *   0 = disabled (production), 1 = enabled (debug build only).
  * Format: "DBG pos=XXXX spd=SSSSS cur=CCCCC V=VVV T=TT fl=FF\r\n" */
 #define DEBUG_UART_MONITOR 0
+
+/* Debug: print raw Hall ADC + reconstructed angle every 250 ms (NECK only).
+ *   0 = disabled (production), 1 = enabled (bring-up / tuning). */
+#define DEBUG_HALL_ANGLE_LOG 0
 
 #ifdef __cplusplus
 }

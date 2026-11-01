@@ -34,15 +34,22 @@ void control_table_load_eeprom_defaults(void) {
     t->status_return_level   = DEFAULT_STATUS_RETURN_LEVEL;
     t->reserved_11           = 0;
     t->alarm_torque_disable  = DEFAULT_ALARM_TORQUE_DISABLE;
+#if MOTOR_USE_HALL_MT9102
+    t->hall_offset_sin       = 1998;
+    t->hall_offset_cos       = 1986;
+    t->hall_gain_sin_num     = 3078;
+    t->hall_gain_sin_den     = 3449;
+    t->hall_calib_done       = 0;
+#endif
 }
 
 /* 0x08004788 : runs after every load (RAM area is never persistent) */
 void control_table_load_ram_defaults(void) {
     control_table_t *t = &g_control_table;
 
-#if MOTOR_HAS_GEARBOX
-    /* Geared motor: MCU is blind to absolute output angle at power-on;
-     * always start with full range in RAM until Master sets session limits. */
+#if MOTOR_HAS_GEARBOX || MOTOR_USE_HALL_MT9102
+    /* Always start with full multi-turn range (-2*PI..+2*PI) in RAM until
+     * Master sets session limits. */
     t->min_angle_limit   = DEFAULT_MIN_ANGLE_LIMIT;
     t->max_angle_limit   = DEFAULT_MAX_ANGLE_LIMIT;
 #endif

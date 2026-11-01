@@ -189,7 +189,16 @@ typedef struct {
   int16_t offset_v;                 /* 0x3E ~ 0x3F: phase V ADC zero */
   int16_t offset_u;                 /* 0x40 ~ 0x41: phase U ADC zero */
   int16_t offset_total;             /* 0x42 ~ 0x43: total-current ADC zero */
+#if MOTOR_USE_HALL_MT9102
+  uint16_t hall_offset_sin;          /* 0x44 ~ 0x45: MT9102 Sin midpoint offset */
+  uint16_t hall_offset_cos;          /* 0x46 ~ 0x47: MT9102 Cos midpoint offset */
+  uint16_t hall_gain_sin_num;        /* 0x48 ~ 0x49: Gain ratio numerator */
+  uint16_t hall_gain_sin_den;        /* 0x4A ~ 0x4B: Gain ratio denominator */
+  uint8_t  hall_calib_done;          /* 0x4C: 1 if Hall calibration valid */
+  uint8_t  reserved_4d[0x78 - 0x4D]; /* 0x4D ~ 0x77 */
+#else
   uint8_t reserved_44[0x78 - 0x44]; /* 0x44 ~ 0x77 */
+#endif
   uint32_t save_counter;            /* 0x78 ~ 0x7B: flash block sequence number */
   uint8_t reserved_7c;              /* 0x7C */
   uint8_t reboot_copy;              /* 0x7D */

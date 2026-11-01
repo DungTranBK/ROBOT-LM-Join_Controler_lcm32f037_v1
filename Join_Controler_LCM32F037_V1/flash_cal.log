@@ -1,0 +1,51 @@
+Load "D:\\Lumi\\LM_2026\\ROBOT\\.src\\Join_Controer\\ROBOT-LM-Join_Controler_lcm32f037_v1\\Join_Controler_LCM32F037_V1\\Objects\\Join_Controler_LCM32F037_V1.axf" 
+Set JLink Project File to "D:\Lumi\LM_2026\ROBOT\.src\Join_Controer\ROBOT-LM-Join_Controler_lcm32f037_v1\Join_Controler_LCM32F037_V1\JLinkSettings.ini"* JLink Info: Device "LCM32F037" selected.
+
+JLink info:
+------------
+DLL: V8.16 , compiled Feb 26 2025 12:07:26
+Firmware: J-Link V9 compiled May  7 2021 16:26:12
+Hardware: V9.40
+S/N : 69404531 
+Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash 
+
+* JLink Info: Found SW-DP with ID 0x0BB11477
+* JLink Info: DPIDR: 0x0BB11477
+* JLink Info: CoreSight SoC-400 or earlier
+* JLink Info: Scanning AP map to find all available APs
+* JLink Info: AP[1]: Stopped AP scan as end of AP map has been reached
+* JLink Info: AP[0]: AHB-AP (IDR: 0x04770021, ADDR: 0x00000000)
+* JLink Info: Iterating through AP map to find AHB-AP to use
+* JLink Info: AP[0]: Core found
+* JLink Info: AP[0]: AHB-AP ROM base: 0xE00FF000
+* JLink Info: CPUID register: 0x410CC200. Implementer code: 0x41 (ARM)
+* JLink Info: Found Cortex-M0 r0p0, Little endian.
+* JLink Info: FPUnit: 4 code (BP) slots and 0 literal slots
+* JLink Info: CoreSight components:
+* JLink Info: ROMTbl[0] @ E00FF000
+* JLink Info: [0][0]: E000E000 CID B105E00D PID 000BB008 SCS
+* JLink Info: [0][1]: E0001000 CID B105E00D PID 000BB00A DWT
+* JLink Info: [0][2]: E0002000 CID B105E00D PID 000BB00B FPB
+ROMTableAddr = 0xE00FF000
+* JLink Info: Reset type: NORMAL (https://wiki.segger.com/J-Link_Reset_Strategies)
+* JLink Info: Reset: Halt core after reset via DEMCR.VC_CORERESET.
+* JLink Info: Reset: Reset device via AIRCR.SYSRESETREQ.
+
+Target info:
+------------
+Device: LCM32F037
+VTarget = 3.300V
+State of Pins: TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 0
+Hardware-Breakpoints: 4
+Software-Breakpoints: 8192
+Watchpoints:          2
+JTAG speed: 4000 kHz
+
+* JLink Info: Memory map 'after startup completion point' is active
+Erase Done.Programming Done.Verify OK.* JLink Info: Memory map 'before startup completion point' is active
+* JLink Info: Reset type: NORMAL (https://wiki.segger.com/J-Link_Reset_Strategies)
+* JLink Info: Reset: Halt core after reset via DEMCR.VC_CORERESET.
+* JLink Info: Reset: Reset device via AIRCR.SYSRESETREQ.
+* JLink Info: Memory map 'after startup completion point' is active
+Application running ...
+Flash Load finished at 20:49:59

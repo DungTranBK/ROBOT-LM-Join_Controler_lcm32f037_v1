@@ -16,7 +16,6 @@
 #include "bsp/bsp_bus_uart.h"
 #include "bsp/bsp_clock.h"
 #include "bsp/bsp_gpio.h"
-#include "bsp/bsp_mt6701.h"
 #include "bsp/bsp_nvic.h"
 #include "bsp/bsp_opa.h"
 #include "bsp/bsp_pwm.h"
@@ -29,6 +28,12 @@
 #include "mid/motor_ctrl.h"
 #include "mid/motor_monitor.h"
 #include "mid/protocol.h"
+
+#if MOTOR_USE_HALL_MT9102
+#include "bsp/bsp_mt9102.h"
+#else
+#include "bsp/bsp_mt6701.h"
+#endif
 
 /**
  * @note  Interrupt handlers:
@@ -57,7 +62,11 @@ int main(void) {
   bsp_pwm_init(FOC_PWM_ARR, FOC_PWM_DEAD_TIME,
                FOC_PWM_ADC_TRIG);  /* 0x080047BC */
   bsp_bus_uart_delay_timer_init(); /* 0x08004894 : TIM2 return-delay timer */
+#if MOTOR_USE_HALL_MT9102
+  bsp_mt9102_init();
+#else
   bsp_mt6701_init();               /* 0x080046B8 */
+#endif
   bsp_bus_uart_init(
       g_control_table.baud_rate); /* 0x080045FC / 0x080039F4 / 0x08004328 */
 
@@ -99,6 +108,10 @@ int main(void) {
       g_eeprom_dirty_flag = 0;
       eeprom_store_save();
     }
+
+#if MOTOR_USE_HALL_MT9102 && DEBUG_HALL_ANGLE_LOG
+    bsp_mt9102_log_poll();
+#endif
 
 #if FEATURE_UART_STREAM_TELEMETRY
     /* Task E: Real-time telemetry streaming if enabled */

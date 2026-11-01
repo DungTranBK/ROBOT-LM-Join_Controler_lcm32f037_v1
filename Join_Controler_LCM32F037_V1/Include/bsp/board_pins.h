@@ -40,7 +40,7 @@ extern "C" {
 #define PIN_PWM_W_L_NUM       3U
 #define PIN_PWM_W_L_AF        2U      /* TIM1_CH3N */
 
-/* ---- SPI0: MT6701 angle sensor ---- */
+/* ---- SPI0: MT6701 angle sensor (HIP / KNEE) ---- */
 #define PIN_ENC_NSS_PORT      BSP_GPIO_PORT_A
 #define PIN_ENC_NSS_NUM       3U
 #define PIN_ENC_NSS_AF        7U      /* SPI0_NSS  */
@@ -50,6 +50,14 @@ extern "C" {
 #define PIN_ENC_MISO_PORT     BSP_GPIO_PORT_A
 #define PIN_ENC_MISO_NUM      5U
 #define PIN_ENC_MISO_AF       0U      /* SPI0_MISO */
+
+/* ---- MT9102 dual linear Hall sensors (analog ADC inputs, NECK) ---- */
+#define PIN_HALL_SIN_PORT     BSP_GPIO_PORT_A
+#define PIN_HALL_SIN_NUM      3U
+#define PIN_HALL_SIN_AF       1U      /* ADCIN[3]: Hall_A analog output (sin) */
+#define PIN_HALL_COS_PORT     BSP_GPIO_PORT_A
+#define PIN_HALL_COS_NUM      4U
+#define PIN_HALL_COS_AF       2U      /* ADCIN[4]: Hall_B analog output (cos) */
 
 /* ---- UART0 one-wire bus: AF7 = listen (RX), AF2 = transmit (TX) ---- */
 #define PIN_BUS_PORT          BSP_GPIO_PORT_A

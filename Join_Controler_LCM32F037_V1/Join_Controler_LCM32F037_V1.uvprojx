@@ -485,6 +485,11 @@
               <FilePath>.\Source\bsp\bsp_mt6701.c</FilePath>
             </File>
             <File>
+              <FileName>bsp_mt9102.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\bsp\bsp_mt9102.c</FilePath>
+            </File>
+            <File>
               <FileName>bsp_nvic.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Source\bsp\bsp_nvic.c</FilePath>

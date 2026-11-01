@@ -9,6 +9,10 @@
 
 #include <string.h>
 
+#include "mid/foc_config.h"
+#if MOTOR_USE_HALL_MT9102
+#include "lcm32f037.h"
+#endif
 #include "bsp/bsp_flash.h"
 
 #include "mid/eeprom_store.h"
@@ -34,6 +38,9 @@ void eeprom_store_save(void) {
     g_control_table.reboot_copy  = g_reboot_flag;
     g_control_table.block_marker = EEPROM_BLOCK_MARKER;
 
+#if MOTOR_USE_HALL_MT9102
+    __disable_irq();
+#endif
     bsp_flash_unlock();
 
     for (;;) {
@@ -65,6 +72,9 @@ void eeprom_store_save(void) {
     }
 
     bsp_flash_lock();
+#if MOTOR_USE_HALL_MT9102
+    __enable_irq();
+#endif
 }
 
 /* 0x080041C8 */

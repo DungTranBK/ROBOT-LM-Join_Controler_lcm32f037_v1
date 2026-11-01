@@ -53,6 +53,32 @@ static void protocol_status_reply(const uint8_t *rx) {
     int16_t cur_pos = motor_ctrl_get_position();
     g_control_table.current_position = cur_pos;
 
+    if (inst == INST_READ_DATA && rx[PKT_IDX_P1] == 0x33U &&
+        rx[PKT_IDX_P2] == 0x11U) {
+      /* Calibration web tool compatibility frame (READ 0x33, len 0x11):
+       * [FF FF ID 16 ERR 04 02 33 calib_done (8B) ang_off(2) off_v(2) off_u(2) off_t(2) CS] */
+      const uint8_t *tbl = (const uint8_t *)&g_control_table;
+      s_tx_last = 8U + 0x11U;
+      s_tx_pkt[0] = PKT_HEADER_BYTE;
+      s_tx_pkt[1] = PKT_HEADER_BYTE;
+      s_tx_pkt[2] = g_last_id;
+      s_tx_pkt[3] = (uint8_t)(s_tx_last - PKT_STATUS_LEN_OFFSET);
+      s_tx_pkt[4] = g_motor_status_flags;
+      s_tx_pkt[5] = rx[PKT_IDX_LEN];
+      s_tx_pkt[6] = inst;
+      s_tx_pkt[7] = rx[PKT_IDX_P1];
+      s_tx_pkt[8] = g_control_table.calib_done;
+      memset(&s_tx_pkt[9], 0, 8U);
+      memcpy(&s_tx_pkt[17], &tbl[0x3CU], 8U);
+      s_tx_pkt[s_tx_last] =
+          checksum_calc(&s_tx_pkt[2], (uint8_t)(s_tx_last - 2U));
+
+      bsp_bus_uart_send_packet(s_tx_pkt, (uint16_t)s_tx_last + 1U,
+                               g_control_table.return_delay_time);
+      g_last_id = g_control_table.motor_id;
+      return;
+    }
+
     s_tx_pkt[0] = PKT_HEADER_BYTE;
     s_tx_pkt[1] = PKT_HEADER_BYTE;
     s_tx_pkt[2] = g_last_id;
@@ -106,8 +132,8 @@ static void handle_write_registers(uint8_t start_addr, const uint8_t *data,
     table_bytes[addr] = data[i];
 
     if (addr < CT_ADDR_EEPROM_END) { /* EEPROM area */
-#if MOTOR_HAS_GEARBOX
-      /* Geared motor: angle limits (0x06..0x09) are set by Master each startup
+#if MOTOR_HAS_GEARBOX || MOTOR_USE_HALL_MT9102
+      /* Angle limits (0x06..0x09) are set by Master each startup
        * and act as volatile RAM registers (never saved to Flash, never blocked
        * by EEPROM lock). */
       if (addr >= REG_MIN_ANGLE_L && addr <= REG_MAX_ANGLE_H) {
@@ -134,9 +160,9 @@ static void handle_write_registers(uint8_t start_addr, const uint8_t *data,
       break;
 
     case REG_CALIBRATION_ENABLE: /* 0x19: start calibration state machine */
-      if (motor_ctrl_start_calibration()) {
-        g_eeprom_dirty_flag = 1;
-      }
+      /* Flash save (g_eeprom_dirty_flag = 1) is triggered automatically at the
+       * end of CAL_STATE_ALIGN once all offsets are measured. */
+      (void)motor_ctrl_start_calibration();
       break;
 
     case REG_CONTROL_MODE: /* 0x2D: explicit RAM mode switch (2=Position, 3=MIT)
@@ -193,16 +219,28 @@ static void handle_write_registers(uint8_t start_addr, const uint8_t *data,
 
     if (wrote_kp) {
       if (g_control_table.kp > g_control_table.kp_max) {
+#if MOTOR_USE_HALL_MT9102
+        (void)prev_kp;
+        g_control_table.kp = g_control_table.kp_max;
+        motor_ctrl_set_kp(g_control_table.kp);
+#else
         g_control_table.kp = prev_kp;
         g_motor_status_flags |= ERR_FLAG_RANGE_LOCK;
+#endif
       } else {
         motor_ctrl_set_kp(g_control_table.kp);
       }
     }
     if (wrote_kd) {
       if (g_control_table.kd > g_control_table.kd_max) {
+#if MOTOR_USE_HALL_MT9102
+        (void)prev_kd;
+        g_control_table.kd = g_control_table.kd_max;
+        motor_ctrl_set_kd(g_control_table.kd);
+#else
         g_control_table.kd = prev_kd;
         g_motor_status_flags |= ERR_FLAG_RANGE_LOCK;
+#endif
       } else {
         motor_ctrl_set_kd(g_control_table.kd);
       }

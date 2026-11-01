@@ -23,7 +23,12 @@ extern "C" {
 #define CAL_STATE_IDLE 0       /* normal run                                  */
 #define CAL_STATE_ZERO_TOTAL 1 /* PWM off, average total-current ADC */
 #define CAL_STATE_ZERO_PHASE 2 /* low duty, average U/V phase ADC */
+#if MOTOR_USE_HALL_MT9102
+#define CAL_STATE_HALL_SWEEP 3 /* open-loop 360 deg sweep, auto-cal Hall Min/Max */
+#define CAL_STATE_ALIGN 4      /* ramp Vd, lock rotor, store angle offset     */
+#else
 #define CAL_STATE_ALIGN 3      /* ramp Vd, lock rotor, store angle offset     */
+#endif
 
 /* Control Modes (register 0x2D control_mode):
  *   2 = Multi-turn Position mode (Goal Position 0x1E..0x1F, speed limit

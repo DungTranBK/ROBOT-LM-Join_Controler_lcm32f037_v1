@@ -7,6 +7,7 @@
 #include "system/lcm32_regs.h"
 #include "bsp/bsp_gpio.h"
 #include "bsp/board_pins.h"
+#include "mid/foc_config.h"
 
 /* gpio_init_pins() parameters */
 #define BSP_GPIO_MODE_AF      2U
@@ -90,6 +91,14 @@ void bsp_gpio_init(void) {
     BOARD_PIN_SET_AF(PWM_W_L);
     BOARD_PIN_SET_AF(PWM_V_L);
 
+#if MOTOR_USE_HALL_MT9102
+    /* MT9102 Hall_A (sin) PA3 + Hall_B (cos) PA4 -> ADC CH3/CH4, analog inputs */
+    gpio_init_pins(s_gpio_port[BSP_GPIO_PORT_A],
+                   BOARD_PIN_MASK(HALL_SIN) | BOARD_PIN_MASK(HALL_COS),
+                   BSP_GPIO_MODE_ANALOG, 0, 0, BSP_GPIO_PUPD_NONE);
+    BOARD_PIN_SET_AF(HALL_SIN);
+    BOARD_PIN_SET_AF(HALL_COS);
+#else
     /* SPI0: MT6701 angle sensor */
     gpio_init_pins(s_gpio_port[BSP_GPIO_PORT_A],
                    BOARD_PIN_MASK(ENC_NSS) | BOARD_PIN_MASK(ENC_SCK) | BOARD_PIN_MASK(ENC_MISO),
@@ -97,6 +106,7 @@ void bsp_gpio_init(void) {
     BOARD_PIN_SET_AF(ENC_NSS);
     BOARD_PIN_SET_AF(ENC_SCK);
     BOARD_PIN_SET_AF(ENC_MISO);
+#endif
 
     /* ADC inputs: Vbus, NTC */
     gpio_init_pins(s_gpio_port[BSP_GPIO_PORT_A],

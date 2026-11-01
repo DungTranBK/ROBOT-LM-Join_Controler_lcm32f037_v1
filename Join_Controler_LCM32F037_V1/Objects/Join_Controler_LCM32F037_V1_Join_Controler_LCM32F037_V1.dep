@@ -1,0 +1,242 @@
+Dependencies for Project 'Join_Controler_LCM32F037_V1', Target 'Join_Controler_LCM32F037_V1': (DO NOT MODIFY !)
+CompilerVersion: 6240000::V6.24::ARMCLANG
+F (.\Source\app\main.c)(0x6AE46DEF)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/main.o -MMD)
+I (Include\bsp\bsp_adc.h)(0x6AE46DEF)
+I (Include\mid\foc_config.h)(0x6AE5F272)
+I (Include\bsp\bsp_bus_uart.h)(0x6ACCBFCA)
+I (Include\bsp\bsp_clock.h)(0x6ACCBF65)
+I (Include\bsp\bsp_gpio.h)(0x6ACCBF71)
+I (Include\bsp\bsp_nvic.h)(0x6ACCBFAF)
+I (Include\bsp\bsp_opa.h)(0x6ACCBF94)
+I (Include\bsp\bsp_pwm.h)(0x6AE3148F)
+I (Include\bsp\bsp_system.h)(0x6ACCBF7B)
+I (Include\bsp\bsp_systick.h)(0x6ACCBF77)
+I (Include\mid\control_table.h)(0x6AE46DEF)
+I (Include\mid\eeprom_store.h)(0x6ACCC994)
+I (Include\mid\motor_ctrl.h)(0x6AE53602)
+I (Include\mid\motor_monitor.h)(0x6ACCC077)
+I (Include\mid\protocol.h)(0x6AE1EA4D)
+I (Include\bsp\bsp_mt9102.h)(0x6AE46C72)
+F (.\Source\app\app_isr.c)(0x6AE46DEF)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/app_isr.o -MMD)
+I (Include\bsp\bsp_adc.h)(0x6AE46DEF)
+I (Include\mid\foc_config.h)(0x6AE5F272)
+I (Include\bsp\bsp_pwm.h)(0x6AE3148F)
+I (Include\mid\motor_ctrl.h)(0x6AE53602)
+I (Include\bsp\bsp_mt9102.h)(0x6AE46C72)
+F (.\Source\mid\control_table.c)(0x6AE53602)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/control_table.o -MMD)
+I (Include\mid\control_table.h)(0x6AE46DEF)
+I (Include\mid\foc_config.h)(0x6AE5F272)
+F (.\Source\mid\checksum.c)(0x6ACCC2B5)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/checksum.o -MMD)
+I (Include\mid\checksum.h)(0x6ACCC00C)
+F (.\Source\mid\eeprom_store.c)(0x6AE4778C)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/eeprom_store.o -MMD)
+I (Include\mid\foc_config.h)(0x6AE5F272)
+I (SDK\inc\lcm32f037.h)(0x6AC4ABD0)
+I (SDK\inc\core_cm0.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_conf.h)(0x6AE32023)
+I (SDK\inc\lcm32f037_rcc.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_uart.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_gpio.h)(0x6AC4ABD0)
+I (SDK\inc\lcm32f037_adc.h)(0x6AC4ABD0)
+I (Include\bsp\bsp_flash.h)(0x6ACCBFB4)
+I (Include\mid\eeprom_store.h)(0x6ACCC994)
+I (Include\mid\control_table.h)(0x6AE46DEF)
+I (Include\mid\checksum.h)(0x6ACCC00C)
+F (.\Source\mid\foc_math.c)(0x6AD04DC9)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/foc_math.o -MMD)
+I (Include\mid\foc_math.h)(0x6ACCC039)
+I (Include\mid\foc_config.h)(0x6AE5F272)
+F (.\Source\mid\motor_ctrl.c)(0x6AE5FFF4)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/motor_ctrl.o -MMD)
+I (Include\bsp\bsp_adc.h)(0x6AE46DEF)
+I (Include\mid\foc_config.h)(0x6AE5F272)
+I (Include\bsp\bsp_pwm.h)(0x6AE3148F)
+I (Include\mid\control_table.h)(0x6AE46DEF)
+I (Include\bsp\bsp_mt9102.h)(0x6AE46C72)
+I (Include\mid\foc_math.h)(0x6ACCC039)
+I (Include\mid\motor_ctrl.h)(0x6AE53602)
+I (Include\mid\trig_table.h)(0x6ACB6AD6)
+F (.\Source\mid\motor_monitor.c)(0x6AE54318)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/motor_monitor.o -MMD)
+I (Include\bsp\bsp_adc.h)(0x6AE46DEF)
+I (Include\mid\foc_config.h)(0x6AE5F272)
+I (Include\bsp\bsp_systick.h)(0x6ACCBF77)
+I (Include\mid\control_table.h)(0x6AE46DEF)
+I (Include\mid\motor_ctrl.h)(0x6AE53602)
+I (Include\mid\motor_monitor.h)(0x6ACCC077)
+I (Include\mid\ntc_table.h)(0x6ACB88A5)
+F (.\Source\mid\protocol.c)(0x6AE53602)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/protocol.o -MMD)
+I (Include\bsp\bsp_bus_uart.h)(0x6ACCBFCA)
+I (Include\mid\checksum.h)(0x6ACCC00C)
+I (Include\mid\control_table.h)(0x6AE46DEF)
+I (Include\mid\foc_config.h)(0x6AE5F272)
+I (Include\mid\eeprom_store.h)(0x6ACCC994)
+I (Include\mid\motor_ctrl.h)(0x6AE53602)
+I (Include\mid\protocol.h)(0x6AE1EA4D)
+F (.\Source\mid\trig_table.c)(0x6AE48735)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/trig_table.o -MMD)
+I (Include\mid\trig_table.h)(0x6ACB6AD6)
+F (.\Source\bsp\bsp_clock.c)(0x6ACCBF67)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/bsp_clock.o -MMD)
+I (Include\system\lcm32_regs.h)(0x6AE32023)
+I (Include\bsp\bsp_clock.h)(0x6ACCBF65)
+F (.\Source\bsp\bsp_gpio.c)(0x6AE46B5D)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/bsp_gpio.o -MMD)
+I (Include\system\lcm32_regs.h)(0x6AE32023)
+I (Include\bsp\bsp_gpio.h)(0x6ACCBF71)
+I (Include\bsp\board_pins.h)(0x6AE46DEF)
+I (Include\mid\foc_config.h)(0x6AE5F272)
+F (.\Source\bsp\bsp_systick.c)(0x6ACCBF79)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/bsp_systick.o -MMD)
+I (Include\system\lcm32_regs.h)(0x6AE32023)
+I (Include\bsp\bsp_clock.h)(0x6ACCBF65)
+I (Include\bsp\bsp_systick.h)(0x6ACCBF77)
+F (.\Source\bsp\bsp_system.c)(0x6ACCCAB8)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/bsp_system.o -MMD)
+I (Include\system\lcm32_regs.h)(0x6AE32023)
+I (Include\bsp\bsp_system.h)(0x6ACCBF7B)
+F (.\Source\bsp\bsp_adc.c)(0x6AE46B84)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/bsp_adc.o -MMD)
+I (SDK\inc\lcm32f037.h)(0x6AC4ABD0)
+I (SDK\inc\core_cm0.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_conf.h)(0x6AE32023)
+I (SDK\inc\lcm32f037_rcc.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_uart.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_gpio.h)(0x6AC4ABD0)
+I (SDK\inc\lcm32f037_adc.h)(0x6AC4ABD0)
+I (SDK\inc\lcm32f037_dma.h)(0x6AC4ABD0)
+I (Include\bsp\bsp_adc.h)(0x6AE46DEF)
+I (Include\mid\foc_config.h)(0x6AE5F272)
+F (.\Source\bsp\bsp_opa.c)(0x6ACCBF97)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/bsp_opa.o -MMD)
+I (SDK\inc\lcm32f037.h)(0x6AC4ABD0)
+I (SDK\inc\core_cm0.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_conf.h)(0x6AE32023)
+I (SDK\inc\lcm32f037_rcc.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_uart.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_gpio.h)(0x6AC4ABD0)
+I (SDK\inc\lcm32f037_adc.h)(0x6AC4ABD0)
+I (SDK\inc\lcm32f037_opa.h)(0x6AC4ABD0)
+I (Include\bsp\bsp_opa.h)(0x6ACCBF94)
+F (.\Source\bsp\bsp_pwm.c)(0x6AE314EA)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/bsp_pwm.o -MMD)
+I (SDK\inc\lcm32f037.h)(0x6AC4ABD0)
+I (SDK\inc\core_cm0.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_conf.h)(0x6AE32023)
+I (SDK\inc\lcm32f037_rcc.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_uart.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_gpio.h)(0x6AC4ABD0)
+I (SDK\inc\lcm32f037_adc.h)(0x6AC4ABD0)
+I (SDK\inc\lcm32f037_tim.h)(0x6AC4ABD0)
+I (Include\bsp\bsp_pwm.h)(0x6AE3148F)
+F (.\Source\bsp\bsp_mt6701.c)(0x6ACCCD15)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/bsp_mt6701.o -MMD)
+I (SDK\inc\lcm32f037.h)(0x6AC4ABD0)
+I (SDK\inc\core_cm0.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_conf.h)(0x6AE32023)
+I (SDK\inc\lcm32f037_rcc.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_uart.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_gpio.h)(0x6AC4ABD0)
+I (SDK\inc\lcm32f037_adc.h)(0x6AC4ABD0)
+I (SDK\inc\lcm32f037_ssp.h)(0x64B7A38C)
+I (Include\bsp\bsp_mt6701.h)(0x6ACCCD15)
+F (.\Source\bsp\bsp_mt9102.c)(0x6AE5E39F)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/bsp_mt9102.o -MMD)
+I (Include\mid\foc_config.h)(0x6AE5F272)
+I (Include\bsp\bsp_mt9102.h)(0x6AE46C72)
+I (Include\bsp\bsp_adc.h)(0x6AE46DEF)
+I (Include\mid\trig_table.h)(0x6ACB6AD6)
+F (.\Source\bsp\bsp_nvic.c)(0x6ACCBFB1)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/bsp_nvic.o -MMD)
+I (SDK\inc\lcm32f037.h)(0x6AC4ABD0)
+I (SDK\inc\core_cm0.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_conf.h)(0x6AE32023)
+I (SDK\inc\lcm32f037_rcc.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_uart.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_gpio.h)(0x6AC4ABD0)
+I (SDK\inc\lcm32f037_adc.h)(0x6AC4ABD0)
+I (SDK\inc\lcm32f037_tim.h)(0x6AC4ABD0)
+I (Include\bsp\bsp_nvic.h)(0x6ACCBFAF)
+F (.\Source\bsp\bsp_flash.c)(0x6ACCCAC1)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/bsp_flash.o -MMD)
+I (SDK\inc\lcm32f037.h)(0x6AC4ABD0)
+I (SDK\inc\core_cm0.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_conf.h)(0x6AE32023)
+I (SDK\inc\lcm32f037_rcc.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_uart.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_gpio.h)(0x6AC4ABD0)
+I (SDK\inc\lcm32f037_adc.h)(0x6AC4ABD0)
+I (SDK\inc\lcm32f037_flash.h)(0x6ACCCD5F)
+I (Include\bsp\bsp_flash.h)(0x6ACCBFB4)
+F (.\Source\bsp\bsp_bus_uart.c)(0x6AE320A3)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/bsp_bus_uart.o -MMD)
+I (Include\bsp\bsp_bus_uart.h)(0x6ACCBFCA)
+I (Include\bsp\bsp_gpio.h)(0x6ACCBF71)
+I (Include\bsp\board_pins.h)(0x6AE46DEF)
+I (Include\system\lcm32_regs.h)(0x6AE32023)
+F (.\Source\system\system_lcm32f037.c)(0x6ACCBF5A)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/system_lcm32f037.o -MMD)
+I (Include\system\lcm32_regs.h)(0x6AE32023)
+F (.\Source\system\startup_lcm32f037.s)(0x6ACB8C08)(--target=arm-arm-none-eabi -mcpu=cortex-m0 -masm=auto  -Wa,armasm,--diag_suppress=A1950W -c-gdwarf-4-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-Wa,armasm,--pd,"__UVISION_VERSION SETA 543" -Wa,armasm,--pd,"LCM32F037 SETA 1"-o ./objects/startup_lcm32f037.o)
+F (.\SDK\src\lcm32f037_rcc.c)(0x6AC768A3)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc -Wno-unused-parameter -Wno-sign-compare -Wno-sometimes-uninitialized -Wno-self-assign-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/lcm32f037_rcc.o -MMD)
+I (SDK\inc\lcm32f037_conf.h)(0x6AE32023)
+I (SDK\inc\lcm32f037_rcc.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037.h)(0x6AC4ABD0)
+I (SDK\inc\core_cm0.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_uart.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_gpio.h)(0x6AC4ABD0)
+I (SDK\inc\lcm32f037_adc.h)(0x6AC4ABD0)
+I (SDK\inc\lcm32f037_flash.h)(0x6ACCCD5F)
+I (SDK\inc\lcm32f037_pwr.h)(0x64B7A38C)
+F (.\SDK\src\lcm32f037_tim.c)(0x6AC4ABD0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc -Wno-unused-parameter -Wno-sign-compare -Wno-sometimes-uninitialized -Wno-self-assign-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/lcm32f037_tim.o -MMD)
+I (SDK\inc\lcm32f037.h)(0x6AC4ABD0)
+I (SDK\inc\core_cm0.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_conf.h)(0x6AE32023)
+I (SDK\inc\lcm32f037_rcc.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_uart.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_gpio.h)(0x6AC4ABD0)
+I (SDK\inc\lcm32f037_adc.h)(0x6AC4ABD0)
+I (SDK\inc\lcm32f037_tim.h)(0x6AC4ABD0)
+F (.\SDK\src\lcm32f037_adc.c)(0x6AC4ABD0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc -Wno-unused-parameter -Wno-sign-compare -Wno-sometimes-uninitialized -Wno-self-assign-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/lcm32f037_adc.o -MMD)
+I (SDK\inc\lcm32f037_adc.h)(0x6AC4ABD0)
+I (SDK\inc\lcm32f037.h)(0x6AC4ABD0)
+I (SDK\inc\core_cm0.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_conf.h)(0x6AE32023)
+I (SDK\inc\lcm32f037_rcc.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_uart.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_gpio.h)(0x6AC4ABD0)
+F (.\SDK\src\lcm32f037_dma.c)(0x6AC4ABD0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc -Wno-unused-parameter -Wno-sign-compare -Wno-sometimes-uninitialized -Wno-self-assign-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/lcm32f037_dma.o -MMD)
+I (SDK\inc\lcm32f037_dma.h)(0x6AC4ABD0)
+I (SDK\inc\lcm32f037.h)(0x6AC4ABD0)
+I (SDK\inc\core_cm0.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_conf.h)(0x6AE32023)
+I (SDK\inc\lcm32f037_rcc.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_uart.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_gpio.h)(0x6AC4ABD0)
+I (SDK\inc\lcm32f037_adc.h)(0x6AC4ABD0)
+F (.\SDK\src\lcm32f037_opa.c)(0x6AC4ABD0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc -Wno-unused-parameter -Wno-sign-compare -Wno-sometimes-uninitialized -Wno-self-assign-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/lcm32f037_opa.o -MMD)
+I (SDK\inc\lcm32f037_rcc.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037.h)(0x6AC4ABD0)
+I (SDK\inc\core_cm0.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_conf.h)(0x6AE32023)
+I (SDK\inc\lcm32f037_uart.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_gpio.h)(0x6AC4ABD0)
+I (SDK\inc\lcm32f037_adc.h)(0x6AC4ABD0)
+I (SDK\inc\lcm32f037_opa.h)(0x6AC4ABD0)
+F (.\SDK\src\lcm32f037_ssp.c)(0x6AC4ABD0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc -Wno-unused-parameter -Wno-sign-compare -Wno-sometimes-uninitialized -Wno-self-assign-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/lcm32f037_ssp.o -MMD)
+I (SDK\inc\lcm32f037.h)(0x6AC4ABD0)
+I (SDK\inc\core_cm0.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_conf.h)(0x6AE32023)
+I (SDK\inc\lcm32f037_rcc.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_uart.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_gpio.h)(0x6AC4ABD0)
+I (SDK\inc\lcm32f037_adc.h)(0x6AC4ABD0)
+I (SDK\inc\lcm32f037_ssp.h)(0x64B7A38C)
+F (.\SDK\src\lcm32f037_flash.c)(0x64B7A38C)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc -Wno-unused-parameter -Wno-sign-compare -Wno-sometimes-uninitialized -Wno-self-assign-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/lcm32f037_flash.o -MMD)
+I (SDK\inc\lcm32f037_flash.h)(0x6ACCCD5F)
+I (SDK\inc\lcm32f037.h)(0x6AC4ABD0)
+I (SDK\inc\core_cm0.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_conf.h)(0x6AE32023)
+I (SDK\inc\lcm32f037_rcc.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_uart.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_gpio.h)(0x6AC4ABD0)
+I (SDK\inc\lcm32f037_adc.h)(0x6AC4ABD0)
+F (.\SDK\src\lcm32f037_gpio.c)(0x6AC4ABD0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc -Wno-unused-parameter -Wno-sign-compare -Wno-sometimes-uninitialized -Wno-self-assign-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/lcm32f037_gpio.o -MMD)
+I (SDK\inc\lcm32f037_gpio.h)(0x6AC4ABD0)
+I (SDK\inc\lcm32f037.h)(0x6AC4ABD0)
+I (SDK\inc\core_cm0.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_conf.h)(0x6AE32023)
+I (SDK\inc\lcm32f037_rcc.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_uart.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_adc.h)(0x6AC4ABD0)
+F (.\SDK\src\lcm32f037_pwr.c)(0x6AC4ABD0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Include -I ./SDK/inc -Wno-unused-parameter -Wno-sign-compare -Wno-sometimes-uninitialized -Wno-self-assign-I"D:/Program Files/Kei_v5/ARM/Pack/Keil/LCM32F0xx_DFP/0.4.72/Device/Include"-I"D:/Program Files/Kei_v5/ARM/CMSIS/Include"-D__UVISION_VERSION="543" -DLCM32F037-o ./objects/lcm32f037_pwr.o -MMD)
+I (SDK\inc\lcm32f037_pwr.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_rcc.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037.h)(0x6AC4ABD0)
+I (SDK\inc\core_cm0.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_conf.h)(0x6AE32023)
+I (SDK\inc\lcm32f037_uart.h)(0x64B7A38C)
+I (SDK\inc\lcm32f037_gpio.h)(0x6AC4ABD0)
+I (SDK\inc\lcm32f037_adc.h)(0x6AC4ABD0)
