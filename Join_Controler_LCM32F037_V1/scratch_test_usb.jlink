@@ -1,0 +1,5 @@
+si SWD
+speed 4000
+connect
+mem32 0x20000000, 4
+q

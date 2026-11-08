@@ -93,12 +93,12 @@ static mt9102_dev_t s_mt9102 = {
 #define HALL_ANGLE_NEGATE_SIN  0   /* 0 = match motor phase rotation direction */
 #define HALL_ANGLE_NEGATE_COS  0   /* 0 = normal, 1 = mirror angle direction  */
 
-/* -------------------------------------------------------------------------
- *  Interpolated quadrant-1 sine lookup (angle_q1 in 0..4096 -> 0..10000)
- *  Uses g_sin_table[128] with 5-bit (32x) linear interpolation between
- *  adjacent entries so raw14 has full 14-bit (0..16383) resolution instead
- *  of 32-count (0.70 deg) steps.
- * ---------------------------------------------------------------------- */
+/**
+ * @func    hall_sin_q1
+ * @brief   Interpolated first-quadrant sine lookup (angle_q1 in 0..4096 -> 0..10000).
+ * @param   angle_q1: First-quadrant angle in 14-bit counts (0..4096)
+ * @retval  Interpolated sine value scaled by 10000 (0..10000)
+ */
 static inline int32_t hall_sin_q1(int32_t angle_q1)
 {
     if (angle_q1 <= 0) {
@@ -114,10 +114,13 @@ static inline int32_t hall_sin_q1(int32_t angle_q1)
     return s0 + (((s1 - s0) * (int32_t)frac) >> 5);
 }
 
-/* -------------------------------------------------------------------------
- *  atan2 directly returning 14-bit angle raw14 in 0..16383
- *  (no floating-point, no libm, no integer division in loop)
- * ---------------------------------------------------------------------- */
+/**
+ * @func    hall_atan2_raw14
+ * @brief   Compute 14-bit angle (0..16383) from signed Cartesian (sin_n, cos_n) via binary search.
+ * @param   sin_n: Normalized sine component
+ * @param   cos_n: Normalized cosine component
+ * @retval  14-bit mechanical angle (0..16383)
+ */
 static int32_t hall_atan2_raw14(int32_t sin_n, int32_t cos_n)
 {
     /* Handle degenerate cases */
@@ -164,6 +167,15 @@ static int32_t hall_atan2_raw14(int32_t sin_n, int32_t cos_n)
  *  Public API
  * ---------------------------------------------------------------------- */
 
+/**
+ * @func    bsp_mt9102_set_calibration
+ * @brief   Update the MT9102 SIN/COS DC offsets and amplitude equalization ratio.
+ * @param   off_sin: SIN channel DC midpoint in 12-bit ADC counts
+ * @param   off_cos: COS channel DC midpoint in 12-bit ADC counts
+ * @param   gain_num: SIN amplitude normalization numerator (COS span)
+ * @param   gain_den: SIN amplitude normalization denominator (SIN span)
+ * @retval  None
+ */
 void bsp_mt9102_set_calibration(uint16_t off_sin, uint16_t off_cos, uint16_t gain_num, uint16_t gain_den)
 {
     if (off_sin > 1000 && off_sin < 3000) {
@@ -183,6 +195,15 @@ void bsp_mt9102_set_calibration(uint16_t off_sin, uint16_t off_cos, uint16_t gai
     s_mt9102.state.init = 0;
 }
 
+/**
+ * @func    bsp_mt9102_get_calibration
+ * @brief   Read the active MT9102 SIN/COS calibration parameters.
+ * @param   off_sin: Pointer to receive SIN DC offset (or NULL)
+ * @param   off_cos: Pointer to receive COS DC offset (or NULL)
+ * @param   gain_num: Pointer to receive SIN gain numerator (or NULL)
+ * @param   gain_den: Pointer to receive SIN gain denominator (or NULL)
+ * @retval  None
+ */
 void bsp_mt9102_get_calibration(uint16_t *off_sin, uint16_t *off_cos, uint16_t *gain_num, uint16_t *gain_den)
 {
     if (off_sin)  *off_sin  = (uint16_t)s_mt9102.active.off_sin;
@@ -191,6 +212,12 @@ void bsp_mt9102_get_calibration(uint16_t *off_sin, uint16_t *off_cos, uint16_t *
     if (gain_den) *gain_den = (uint16_t)s_mt9102.active.gain_sin_den;
 }
 
+/**
+ * @func    bsp_mt9102_recalibrate
+ * @brief   Reset the Cartesian IIR filter state and restore active calibration from baseline.
+ * @param   None
+ * @retval  None
+ */
 void bsp_mt9102_recalibrate(void)
 {
     s_mt9102.active = s_mt9102.base;
@@ -201,11 +228,23 @@ void bsp_mt9102_recalibrate(void)
     s_mt9102.state.init     = 0;
 }
 
+/**
+ * @func    bsp_mt9102_init
+ * @brief   Initialize the dual MT9102 linear Hall sensor processing state.
+ * @param   None
+ * @retval  None
+ */
 void bsp_mt9102_init(void)
 {
     bsp_mt9102_recalibrate();
 }
 
+/**
+ * @func    bsp_mt9102_read_raw
+ * @brief   Sample SIN/COS Hall ADC channels, apply offset/gain/IIR filtering, and compute 14-bit rotor angle.
+ * @param   None
+ * @retval  14-bit mechanical rotor angle (0..16383)
+ */
 int32_t bsp_mt9102_read_raw(void)
 {
     /* ---- 1. Read raw ADC values, snapshot for debug log ---- */
@@ -264,6 +303,12 @@ int32_t bsp_mt9102_read_raw(void)
 
 #if DEBUG_HALL_ANGLE_LOG
 
+/**
+ * @func    bsp_mt9102_log_poll
+ * @brief   Periodically transmit a diagnostic UART line with raw Hall ADC and reconstructed angle.
+ * @param   None
+ * @retval  None
+ */
 void bsp_mt9102_log_poll(void)
 {
     static uint32_t s_last_ms = 0;
@@ -299,4 +344,3 @@ void bsp_mt9102_log_poll(void)
 #endif /* DEBUG_HALL_ANGLE_LOG */
 
 #endif /* MOTOR_USE_HALL_MT9102 */
-

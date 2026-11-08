@@ -48,4 +48,4 @@ Erase Done.Programming Done.Verify OK.* JLink Info: Memory map 'before startup c
 * JLink Info: Reset: Reset device via AIRCR.SYSRESETREQ.
 * JLink Info: Memory map 'after startup completion point' is active
 Application running ...
-Flash Load finished at 21:49:35
+Flash Load finished at 00:41:23

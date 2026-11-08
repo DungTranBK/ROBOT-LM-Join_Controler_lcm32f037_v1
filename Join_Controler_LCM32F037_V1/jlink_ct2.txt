@@ -1,0 +1,6 @@
+device CORTEX-M0
+si SWD
+speed 4000
+connect
+mem8 0x200000e0 80
+q

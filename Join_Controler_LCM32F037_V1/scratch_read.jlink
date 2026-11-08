@@ -1,0 +1,9 @@
+si 1
+speed 4000
+connect
+h
+mem32 0x200001B4 12
+mem32 0x20000230 16
+mem32 0x20000174 16
+g
+q

@@ -1,0 +1,7 @@
+device CORTEX-M0
+si SWD
+speed 4000
+connect
+r
+g
+q

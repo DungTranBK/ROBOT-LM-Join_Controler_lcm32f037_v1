@@ -1,0 +1,35 @@
+device LCM32F037
+si SWD
+speed 4000
+connect
+mem32 0x200001b4, 1
+sleep 100
+mem32 0x200001b4, 1
+sleep 100
+mem32 0x200001b4, 1
+sleep 100
+mem32 0x200001b4, 1
+sleep 100
+mem32 0x200001b4, 1
+sleep 100
+mem32 0x200001b4, 1
+sleep 100
+mem32 0x200001b4, 1
+sleep 100
+mem32 0x200001b4, 1
+sleep 100
+mem32 0x200001b4, 1
+sleep 100
+mem32 0x200001b4, 1
+sleep 100
+mem32 0x200001b4, 1
+sleep 100
+mem32 0x200001b4, 1
+sleep 100
+mem32 0x200001b4, 1
+sleep 100
+mem32 0x200001b4, 1
+sleep 100
+mem32 0x200001b4, 1
+sleep 100
+q

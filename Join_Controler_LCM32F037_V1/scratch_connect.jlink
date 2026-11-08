@@ -1,0 +1,7 @@
+device Cortex-M0
+si SWD
+speed 4000
+connect
+r
+h
+q

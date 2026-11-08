@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tài Liệu Giao Thức Điều Khiển Động Cơ Khớp Robot</title>
+  <style>
+    :root {
+      --bg-page: #f4f6f9;
+      --bg-card: #ffffff;
+      --bg-subtle: #f8fafc;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: #e2e8f0;
+      --primary: #1e40af;
+      --primary-light: #dbeafe;
+      --accent-green: #047857;
+      --accent-green-bg: #d1fae5;
+      --accent-amber: #b45309;
+      --accent-amber-bg: #fef3c7;
+      --accent-red: #b91c1c;
+      --accent-red-bg: #fee2e2;
+      --accent-purple: #6d28d9;
+      --accent-purple-bg: #ede9fe;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.6;
+      font-size: 14.5px;
+      padding: 28px 16px 60px;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    /* Header Banner */
+    .doc-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: #ffffff;
+      padding: 32px 36px;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .doc-header h1 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .doc-header .subtitle {
+      color: #cbd5e1;
+      font-size: 14px;
+    }
+
+    .meta-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .meta-badge {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #f8fafc;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+    }
+
+    /* Navigation Pills */
+    .toc-bar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 12px 18px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    }
+
+    .toc-bar span {
+      font-weight: 700;
+      font-size: 12.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-right: 6px;
+    }
+
+    .toc-bar a {
+      text-decoration: none;
+      color: var(--primary);
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.15s ease;
+    }
+
+    .toc-bar a:hover {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* Section Card */
+    .section-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #0f172a;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .section-num {
+      background: var(--primary);
+      color: #fff;
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    h3 {
+      font-size: 15.5px;
+      font-weight: 700;
+      color: #1e293b;
+      margin: 22px 0 12px;
+    }
+
+    h3:first-of-type {
+      margin-top: 4px;
+    }
+
+    p {
+      margin-bottom: 12px;
+      color: #334155;
+    }
+
+    /* Tables */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 12px 0 18px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+
+    th {
+      background: #f1f5f9;
+      color: #1e293b;
+      font-weight: 700;
+      text-align: left;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: top;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background-color: #f8fafc;
+    }
+
+    tr.highlight-row td {
+      background-color: #f0fdf4;
+    }
+
+    tr.highlight-row:hover td {
+      background-color: #dcfce7;
+    }
+
+    /* Visual Packet Strip */
+    .packet-diagram {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(78px, 1fr));
+      gap: 6px;
+      margin: 16px 0;
+    }
+
+    .pkt-cell {
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 10px 8px;
+      text-align: center;
+      background: #f8fafc;
+    }
+
+    .pkt-cell .byte-idx {
+      font-size: 11px;
+      font-weight: 600;
+      color: #64748b;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .pkt-cell .field-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #0f172a;
+      font-family: var(--font-mono);
+      margin-bottom: 4px;
+    }
+
+    .pkt-cell .field-val {
+      font-size: 11.5px;
+      color: #475569;
+      font-family: var(--font-mono);
+    }
+
+    .pkt-cell.hdr {
+      background: #eff6ff;
+      border-color: #93c5fd;
+    }
+
+    .pkt-cell.pos-highlight {
+      background: #ecfdf5;
+      border: 2px solid #10b981;
+    }
+
+    .pkt-cell.pos-highlight .field-name {
+      color: #047857;
+    }
+
+    .pkt-cell.status-cell {
+      background: #fef3c7;
+      border-color: #fcd34d;
+    }
+
+    .pkt-cell.cs-cell {
+      background: #f3e8ff;
+      border-color: #c4b5fd;
+    }
+
+    /* Badges & Code Pills */
+    code {
+      font-family: var(--font-mono);
+      background: #f1f5f9;
+      color: #0f172a;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12.5px;
+      font-weight: 600;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 5px;
+      font-size: 11.5px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+    }
+
+    .badge-ro {
+      background: #e2e8f0;
+      color: #475569;
+    }
+
+    .badge-rw {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .badge-bit {
+      background: var(--accent-red-bg);
+      color: var(--accent-red);
+    }
+
+    /* Formula & Callout Boxes */
+    .formula-box {
+      background: #0f172a;
+      color: #f8fafc;
+      font-family: var(--font-mono);
+      padding: 14px 18px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      margin: 12px 0 16px;
+      overflow-x: auto;
+    }
+
+    .callout {
+      border-left: 4px solid var(--primary);
+      background: #eff6ff;
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      margin: 14px 0;
+      font-size: 13.5px;
+      color: #1e3a8a;
+    }
+
+    .callout.green {
+      border-left-color: #10b981;
+      background: #ecfdf5;
+      color: #065f46;
+    }
+
+    .callout.amber {
+      border-left-color: #f59e0b;
+      background: #fffbeb;
+      color: #92400e;
+    }
+
+    ul.detail-list {
+      margin: 8px 0 14px 20px;
+      color: #334155;
+    }
+
+    ul.detail-list li {
+      margin-bottom: 6px;
+    }
+
+    /* Hex Frame Example Box */
+    .hex-example {
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      background: var(--bg-subtle);
+    }
+
+    .hex-example h4 {
+      font-size: 14.5px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #0f172a;
+    }
+
+    .hex-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 8px 0;
+      flex-wrap: wrap;
+    }
+
+    .dir-tag {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 5px;
+      min-width: 110px;
+      text-align: center;
+    }
+
+    .dir-tx {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .dir-rx {
+      background: #d1fae5;
+      color: #047857;
+    }
+
+    .hex-bytes {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      background: #0f172a;
+      color: #38bdf8;
+      padding: 8px 14px;
+      border-radius: 6px;
+      letter-spacing: 0.04em;
+    }
+
+    .hex-bytes .hl-pos {
+      color: #4ade80;
+      text-decoration: underline;
+    }
+
+    .hex-bytes .hl-cs {
+      color: #c084fc;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+        padding: 0;
+      }
+
+      .toc-bar {
+        display: none;
+      }
+
+      .section-card {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- HEADER -->
+    <header class="doc-header">
+      <div>
+        <h1>TÀI LIỆU GIAO THỨC ĐIỀU KHIỂN ĐỘNG CƠ KHỚP ROBOT V1.0.0</h1>
+        <div class="subtitle">Đặc tả giao tiếp nối tiếp dành cho Bộ điều khiển cấp cao (Master Controller)</div>
+      </div>
+      <div class="meta-badges">
+        <span class="meta-badge">UART 1 Mbps (8N1)</span>
+        <span class="meta-badge">Little-Endian</span>
+        <span class="meta-badge">16384 counts / 2π rad</span>
+      </div>
+    </header>
+
+    <!-- QUICK NAVIGATION -->
+    <nav class="toc-bar">
+      <span>Mục lục:</span>
+      <a href="#sec-1">1. Tầng Vật Lý</a>
+      <a href="#sec-2">2. Khung Bản Tin &amp; Cờ Lỗi</a>
+      <a href="#sec-3">3. Tập Lệnh</a>
+      <a href="#sec-4">4. Bảng Thanh Ghi</a>
+      <a href="#sec-5">5. Khối Điều Khiển 0x1A..0x23</a>
+      <a href="#sec-6">6. Lệnh Đồng Bộ 0x83</a>
+      <a href="#sec-7">7. Ví Dụ Bản Tin Hex</a>
+    </nav>
+
+    <!-- SECTION 1: PHYSICAL LAYER -->
+    <section id="sec-1" class="section-card">
+      <div class="section-title">
+        <span class="section-num">1</span>
+        <span>TỔNG QUAN GIAO TIẾP VẬT LÝ</span>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 28%;">Thông số</th>
+              <th style="width: 32%;">Giá trị chuẩn</th>
+              <th>Mô tả chi tiết</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Chuẩn giao tiếp vật lý</strong></td>
+              <td>UART Half-Duplex (1 dây / RS-485)</td>
+              <td>Truyền nhận bán song công trên cùng đường bus</td>
+            </tr>
+            <tr>
+              <td><strong>Tốc độ Baud mặc định</strong></td>
+              <td><code>1,000,000 bps</code> (1 Mbps)</td>
+              <td>Khung truyền <code>8N1</code> (1 Start bit, 8 Data bits, 1 Stop bit, Không Parity)</td>
+            </tr>
+            <tr>
+              <td><strong>Thứ tự Byte (Endianness)</strong></td>
+              <td><strong>Little-Endian</strong></td>
+              <td>Mọi thanh ghi 2 byte luôn truyền <strong>Byte Thấp (Low) trước</strong>, <strong>Byte Cao (High)
+                  sau</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Cơ chế trao đổi</strong></td>
+              <td>Master – Slave (Hỏi – Đáp)</td>
+              <td>Master phát <em>Bản tin Lệnh</em>, Driver trả về <em>Bản tin Phản hồi</em></td>
+            </tr>
+            <tr>
+              <td><strong>Địa chỉ ID Động cơ</strong></td>
+              <td><code>0x00</code> .. <code>0xFD</code> (0 .. 253)</td>
+              <td>Mặc định <code>0x01</code>. Địa chỉ <code>0xFE</code> (254) là <strong>ID Quảng bá
+                  (Broadcast)</strong> — mọi động cơ nhận lệnh nhưng không phát phản hồi</td>
+            </tr>
+            <tr>
+              <td><strong>Chế độ mặc định khi cấp nguồn</strong></td>
+              <td><strong>Mode 3 (MIT / Impedance Mode)</strong></td>
+              <td>Thanh ghi <code>0x2D = 3</code>, Độ cứng <code>Kp = 10.0 N·m/rad</code>, Giảm chấn
+                <code>Kd = 0.036 N·m·s/rad</code>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 2: PACKET FORMATS -->
+    <section id="sec-2" class="section-card">
+      <div class="section-title">
+        <span class="section-num">2</span>
+        <span>ĐỊNH DẠNG KHUNG BẢN TIN (PACKET FORMATS)</span>
+      </div>
+
+      <h3>2.1. Bản tin Lệnh (Instruction Packet: Master gửi xuống Driver)</h3>
+      <div class="packet-diagram">
+        <div class="pkt-cell hdr">
+          <div class="byte-idx">Byte 0</div>
+          <div class="field-name">Header 1</div>
+          <div class="field-val">0xFF</div>
+        </div>
+        <div class="pkt-cell hdr">
+          <div class="byte-idx">Byte 1</div>
+          <div class="field-name">Header 2</div>
+          <div class="field-val">0xFF</div>
+        </div>
+        <div class="pkt-cell">
+          <div class="byte-idx">Byte 2</div>
+          <div class="field-name">ID</div>
+          <div class="field-val">0x00..0xFE</div>
+        </div>
+        <div class="pkt-cell">
+          <div class="byte-idx">Byte 3</div>
+          <div class="field-name">Length</div>
+          <div class="field-val">N + 2</div>
+        </div>
+        <div class="pkt-cell">
+          <div class="byte-idx">Byte 4</div>
+          <div class="field-name">Instruction</div>
+          <div class="field-val">Mã lệnh</div>
+        </div>
+        <div class="pkt-cell">
+          <div class="byte-idx">Byte 5 .. 4+N</div>
+          <div class="field-name">Param 1..N</div>
+          <div class="field-val">N byte tham số</div>
+        </div>
+        <div class="pkt-cell cs-cell">
+          <div class="byte-idx">Byte 5+N</div>
+          <div class="field-name">CheckSum</div>
+          <div class="field-val">Kiểm tra lỗi</div>
+        </div>
+      </div>
+
+      <ul class="detail-list">
+        <li><strong>Header 1, Header 2 (Byte 0..1)</strong>: Luôn cố định là <code>0xFF 0xFF</code> báo hiệu đầu khung
+          truyền.</li>
+        <li><strong>ID (Byte 2)</strong>: Địa chỉ động cơ đích (<code>0x00..0xFD</code>) hoặc ID Quảng bá
+          (<code>0xFE</code>).</li>
+        <li><strong>Length (Byte 3)</strong>: Bằng số byte tham số <code>N</code> cộng thêm <code>2</code>
+          (<code>Length = N + 2</code>). Tổng số byte toàn khung = <code>Length + 4</code>.</li>
+        <li><strong>Instruction (Byte 4)</strong>: Mã lệnh thực thi (xem Mục 3).</li>
+        <li><strong>Param 1 .. Param N (Byte 5 .. 4+N)</strong>: Dữ liệu tham số đi kèm lệnh.</li>
+        <li><strong>CheckSum (Byte cuối)</strong>: Đảo bit (NOT 8-bit) tổng các byte từ <code>ID</code> đến hết
+          <code>Param N</code>:
+        </li>
+      </ul>
+      <div class="formula-box">
+        CheckSum = NOT( ID + Length + Instruction + Param_1 + ... + Param_N ) &amp; 0xFF
+      </div>
+
+      <h3>2.2. Bản tin Phản hồi (Response Packet: Driver trả về Master)</h3>
+      <div class="callout green">
+        <strong>Vị trí trục ra thời gian thực trong mọi gói Phản hồi:</strong><br />
+        Ngay sau byte <code>Status</code> (Byte 4), Driver luôn đính kèm <strong>2 byte vị trí thực tế hiện tại của trục
+          ra (<code>Pos_L</code>, <code>Pos_H</code> tại Byte 5 và Byte 6)</strong> trong tất cả các gói phản hồi
+        (<code>PING</code>, <code>WRITE</code>, <code>READ</code>, <code>REG_WRITE</code>). Khi Master gửi lệnh điều
+        khiển <code>WRITE (0x03)</code>, gói phản hồi trả về có sẵn góc thực tế của trục ra mà không cần gửi thêm lệnh
+        <code>READ</code>.
+      </div>
+
+      <div class="packet-diagram">
+        <div class="pkt-cell hdr">
+          <div class="byte-idx">Byte 0</div>
+          <div class="field-name">Header 1</div>
+          <div class="field-val">0xFF</div>
+        </div>
+        <div class="pkt-cell hdr">
+          <div class="byte-idx">Byte 1</div>
+          <div class="field-name">Header 2</div>
+          <div class="field-val">0xFF</div>
+        </div>
+        <div class="pkt-cell">
+          <div class="byte-idx">Byte 2</div>
+          <div class="field-name">ID</div>
+          <div class="field-val">ID Động cơ</div>
+        </div>
+        <div class="pkt-cell">
+          <div class="byte-idx">Byte 3</div>
+          <div class="field-name">Length</div>
+          <div class="field-val">M + 7</div>
+        </div>
+        <div class="pkt-cell status-cell">
+          <div class="byte-idx">Byte 4</div>
+          <div class="field-name">Status</div>
+          <div class="field-val">Cờ lỗi</div>
+        </div>
+        <div class="pkt-cell pos-highlight">
+          <div class="byte-idx">Byte 5</div>
+          <div class="field-name">Pos_L</div>
+          <div class="field-val">Góc hiện tại (Thấp)</div>
+        </div>
+        <div class="pkt-cell pos-highlight">
+          <div class="byte-idx">Byte 6</div>
+          <div class="field-name">Pos_H</div>
+          <div class="field-val">Góc hiện tại (Cao)</div>
+        </div>
+        <div class="pkt-cell">
+          <div class="byte-idx">Byte 7</div>
+          <div class="field-name">Pre Len</div>
+          <div class="field-val">Độ dài lệnh</div>
+        </div>
+        <div class="pkt-cell">
+          <div class="byte-idx">Byte 8</div>
+          <div class="field-name">Inst</div>
+          <div class="field-val">Mã lệnh</div>
+        </div>
+        <div class="pkt-cell">
+          <div class="byte-idx">Byte 9</div>
+          <div class="field-name">Pre Para 1</div>
+          <div class="field-val">Tham số 1 / 0x00</div>
+        </div>
+        <div class="pkt-cell">
+          <div class="byte-idx">Byte 10..9+M</div>
+          <div class="field-name">Para 1..M</div>
+          <div class="field-val">Chỉ có khi READ</div>
+        </div>
+        <div class="pkt-cell cs-cell">
+          <div class="byte-idx">Byte 10+M</div>
+          <div class="field-name">CheckSum</div>
+          <div class="field-val">Kiểm tra lỗi</div>
+        </div>
+      </div>
+
+      <ul class="detail-list">
+        <li><strong>Byte 3 (<code>Length</code>)</strong>:
+          <ul>
+            <li>Với lệnh <code>PING (0x01)</code>, <code>WRITE (0x03)</code>, <code>REG_WRITE (0x04)</code>,
+              <code>RESET (0x06)</code> (<code>M = 0</code>): <strong><code>Length = 0x07</code></strong> &rarr; Tổng
+              kích thước gói phản hồi cố định là <strong>11 byte</strong>.
+            </li>
+            <li>Với lệnh <code>READ (0x02)</code> đọc <code>M</code> byte: <strong><code>Length = M + 7</code></strong>
+              &rarr; Tổng kích thước gói phản hồi là <strong><code>M + 11</code> byte</strong>.</li>
+          </ul>
+        </li>
+        <li><strong>Byte 4 (<code>Status</code>)</strong>: Byte cờ báo lỗi của Driver (<code>0x00</code> = Không có
+          lỗi). Xem bảng giải mã tại Mục 2.3.</li>
+        <li><strong>Byte 5..6 (<code>Pos_L</code>, <code>Pos_H</code>)</strong>: <strong>Vị trí thực tế hiện tại của
+            trục ra</strong> (Số nguyên 2 byte có dấu bù 2, dải <code>-32768 .. +32767</code>, Little-Endian):
+          <ul>
+            <li>Ghép 2 byte: <code>Vị trí (counts) = Pos_H &times; 256 + Pos_L</code> (nếu giá trị &ge; 32768 thì trừ đi
+              65536).</li>
+            <li>Độ phân giải: <strong><code>16384 counts = 1 vòng trục ra = 2&pi; rad = 360&deg;</code></strong>.</li>
+            <li>Quy đổi sang Radian: <code>Góc trục ra [rad] = Vị trí (counts) &times; (2&pi; / 16384)</code>.</li>
+          </ul>
+        </li>
+        <li><strong>Byte 7 (<code>Pre Len</code>)</strong>: Nhắc lại byte <code>Length</code> của gói lệnh mà Master vừa
+          gửi.</li>
+        <li><strong>Byte 8 (<code>Inst</code>)</strong>: Nhắc lại mã lệnh <code>Instruction</code> mà Master vừa gửi.
+        </li>
+        <li><strong>Byte 9 (<code>Pre Para 1</code>)</strong>: Nhắc lại <code>Param 1</code> (địa chỉ thanh ghi bắt đầu)
+          đối với lệnh <code>READ</code>, <code>WRITE</code>, <code>REG_WRITE</code>; bằng <code>0x00</code> đối với các
+          lệnh khác.</li>
+        <li><strong>Byte 10 .. 9+M (<code>Para 1..M</code>)</strong>: Chỉ xuất hiện ở lệnh <code>READ (0x02)</code> chứa
+          <code>M</code> byte dữ liệu đọc về. Với các lệnh khác (<code>M = 0</code>), Byte 10 chính là
+          <code>CheckSum</code>.
+        </li>
+        <li><strong>Byte cuối (<code>CheckSum</code>, tại vị trí Byte 10+M)</strong>: Đảo bit tổng từ Byte 2
+          (<code>ID</code>) đến Byte <code>9+M</code>.</li>
+      </ul>
+
+      <h3>2.3. Giải mã Byte <code>Status</code> (Byte 4 của Bản tin Phản hồi)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 10%;">Bit</th>
+              <th style="width: 12%;">Mã Hex</th>
+              <th style="width: 25%;">Tên cờ lỗi</th>
+              <th>Mô tả chi tiết &amp; Cơ chế bảo vệ của Driver</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Bit 7</strong></td>
+              <td><code>0x80</code></td>
+              <td>Dự phòng</td>
+              <td>Luôn bằng <code>0</code></td>
+            </tr>
+            <tr>
+              <td><strong>Bit 6</strong></td>
+              <td><span class="badge badge-bit">0x40</span></td>
+              <td><strong>Lỗi Mã lệnh / Cú pháp</strong></td>
+              <td>Sai cấu trúc khung truyền hoặc mã lệnh <code>Instruction</code> không hợp lệ (tự xóa ở gói hợp lệ kế
+                tiếp)</td>
+            </tr>
+            <tr>
+              <td><strong>Bit 5</strong></td>
+              <td><span class="badge badge-bit">0x20</span></td>
+              <td><strong>Lỗi Quá tải / Kẹt trục</strong></td>
+              <td>Động cơ bị kẹt cơ khí hoặc dòng tiêu thụ vượt <code>1500 mA</code> liên tục quá <code>2000 ms</code> —
+                Driver tự ngắt lực giữ (<code>0x18 = 0</code>) để bảo vệ động cơ</td>
+            </tr>
+            <tr>
+              <td><strong>Bit 4</strong></td>
+              <td><span class="badge badge-bit">0x10</span></td>
+              <td><strong>Lỗi CheckSum</strong></td>
+              <td>Sai byte <code>CheckSum</code> ở gói lệnh gửi xuống (tự xóa ở gói hợp lệ kế tiếp)</td>
+            </tr>
+            <tr>
+              <td><strong>Bit 3</strong></td>
+              <td><span class="badge badge-bit">0x08</span></td>
+              <td><strong>Lỗi Vượt ngưỡng / Khóa ghi</strong></td>
+              <td>Độ dài dữ liệu ghi vượt phạm vi bảng thanh ghi, giá trị <code>Kp</code>/<code>Kd</code> vượt ngưỡng tối đa (<code>Kp_max</code>/<code>Kd_max</code>), sai mã chế độ điều khiển, hoặc ghi vào vùng thanh ghi chỉ đọc / EEPROM đang khóa</td>
+            </tr>
+            <tr>
+              <td><strong>Bit 2</strong></td>
+              <td><span class="badge badge-bit">0x04</span></td>
+              <td><strong>Lỗi Quá nhiệt</strong></td>
+              <td>Nhiệt độ bo mạch vượt ngưỡng giới hạn (<code>70&deg;C</code>) — Driver tự ngắt lực giữ</td>
+            </tr>
+            <tr>
+              <td><strong>Bit 1</strong></td>
+              <td><span class="badge badge-bit">0x02</span></td>
+              <td><strong>Lỗi Giới hạn góc</strong></td>
+              <td>Vị trí đích gửi xuống nằm ngoài khoảng giới hạn góc <code>[0x06..0x09]</code> — Lệnh vị trí đó bị từ
+                chối</td>
+            </tr>
+            <tr>
+              <td><strong>Bit 0</strong></td>
+              <td><span class="badge badge-bit">0x01</span></td>
+              <td><strong>Lỗi Điện áp</strong></td>
+              <td>Điện áp nguồn DC Bus nằm ngoài dải cho phép (<code>6.0V .. 16.0V</code>)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 3: INSTRUCTION SET -->
+    <section id="sec-3" class="section-card">
+      <div class="section-title">
+        <span class="section-num">3</span>
+        <span>TẬP LỆNH CHI TIẾT (INSTRUCTION SET)</span>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 18%;">Tên lệnh</th>
+              <th style="width: 10%;">Mã Hex</th>
+              <th style="width: 14%;">Length</th>
+              <th style="width: 32%;">Cấu trúc Tham số (Param 1 .. N)</th>
+              <th>Bản tin Phản hồi từ Driver</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>PING</strong></td>
+              <td><code>0x01</code></td>
+              <td><code>0x02</code></td>
+              <td>Không có tham số (<code>N = 0</code>)</td>
+              <td>11 byte (<code>Length = 0x07</code>, có <code>Pos_L, Pos_H</code>)</td>
+            </tr>
+            <tr>
+              <td><strong>READ_DATA</strong></td>
+              <td><code>0x02</code></td>
+              <td><code>0x04</code></td>
+              <td><code>Param 1</code>: Địa chỉ thanh ghi bắt đầu<br /><code>Param 2</code>: Số byte cần đọc
+                (<code>M</code>)</td>
+              <td><code>11 + M</code> byte (<code>Length = M + 7</code>)</td>
+            </tr>
+            <tr>
+              <td><strong>WRITE_DATA</strong></td>
+              <td><code>0x03</code></td>
+              <td><code>K + 3</code></td>
+              <td><code>Param 1</code>: Địa chỉ thanh ghi bắt đầu<br /><code>Param 2..K+1</code>: <code>K</code> byte dữ
+                liệu cần ghi</td>
+              <td>11 byte (<code>Length = 0x07</code>, có <code>Pos_L, Pos_H</code>)</td>
+            </tr>
+            <tr>
+              <td><strong>REG_WRITE</strong></td>
+              <td><code>0x04</code></td>
+              <td><code>K + 3</code></td>
+              <td>Giống <code>WRITE_DATA</code> nhưng lưu vào bộ đệm chờ lệnh <code>ACTION</code></td>
+              <td>11 byte (<code>Length = 0x07</code>, có <code>Pos_L, Pos_H</code>)</td>
+            </tr>
+            <tr>
+              <td><strong>ACTION</strong></td>
+              <td><code>0x05</code></td>
+              <td><code>0x02</code></td>
+              <td>Kích hoạt đồng loạt dữ liệu đã nạp qua <code>REG_WRITE</code></td>
+              <td>Không phản hồi khi gửi tới ID <code>0xFE</code></td>
+            </tr>
+            <tr>
+              <td><strong>RESET</strong></td>
+              <td><code>0x06</code></td>
+              <td><code>0x02</code></td>
+              <td>Khôi phục cấu hình về mặc định xuất xưởng</td>
+              <td>11 byte (<code>Length = 0x07</code>)</td>
+            </tr>
+            <tr>
+              <td><strong>REBOOT</strong></td>
+              <td><code>0x64</code></td>
+              <td><code>0x02</code></td>
+              <td>Lưu cấu hình xuống bộ nhớ Flash và khởi động lại Driver</td>
+              <td>Không phản hồi</td>
+            </tr>
+            <tr>
+              <td><strong>SYNC_WRITE</strong></td>
+              <td><code>0x83</code></td>
+              <td><code>(L+1)&times;K + 4</code></td>
+              <td>Ghi đồng loạt cùng một vùng thanh ghi cho <code>K</code> động cơ (dùng ID <code>0xFE</code>)</td>
+              <td>Không phản hồi</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <strong>Quy tắc trả lời gói Phản hồi (Thanh ghi <code>0x10</code> - Mức phản hồi Status):</strong>
+        <ul class="detail-list" style="margin-bottom: 0;">
+          <li><strong>Giá trị <code>0</code></strong>: Driver chỉ phát gói phản hồi cho lệnh <code>PING (0x01)</code>.
+          </li>
+          <li><strong>Giá trị <code>1</code></strong>: Driver chỉ phát gói phản hồi cho lệnh <code>PING (0x01)</code> và
+            <code>READ_DATA (0x02)</code>.
+          </li>
+          <li><strong>Giá trị <code>2</code> (Mặc định)</strong>: Driver phát gói phản hồi (luôn kèm
+            <code>Pos_L, Pos_H</code>) cho mọi lệnh gửi tới ID riêng của nó.
+          </li>
+          <li><strong>Gửi tới ID Quảng bá (<code>0xFE</code>)</strong>: Mọi động cơ thực thi lệnh nhưng không động cơ
+            nào phát gói phản hồi.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SECTION 4: CONTROL TABLE -->
+    <section id="sec-4" class="section-card">
+      <div class="section-title">
+        <span class="section-num">4</span>
+        <span>BẢNG THANH GHI ĐIỀU KHIỂN (CONTROL TABLE MAP)</span>
+      </div>
+
+      <h3>4.1. Vùng EEPROM (<code>0x00 .. 0x17</code>) — Lưu trữ bền vững trong Flash</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 12%;">Địa chỉ</th>
+              <th style="width: 22%;">Tên thanh ghi</th>
+              <th style="width: 16%;">Kích thước &amp; Dấu</th>
+              <th style="width: 8%;">Quyền</th>
+              <th style="width: 12%;">Mặc định</th>
+              <th>Đơn vị &amp; Mô tả chi tiết</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>0x00..0x01</code></td>
+              <td>Mã Model</td>
+              <td>2 byte không dấu</td>
+              <td><span class="badge badge-ro">R</span></td>
+              <td><code>12</code> (<code>0x000C</code>)</td>
+              <td>Mã định danh dòng động cơ</td>
+            </tr>
+            <tr>
+              <td><code>0x02</code></td>
+              <td>Phiên bản Firmware</td>
+              <td>1 byte không dấu</td>
+              <td><span class="badge badge-ro">R</span></td>
+              <td><code>28</code> (<code>0x1C</code>)</td>
+              <td>Phiên bản phần mềm của Driver</td>
+            </tr>
+            <tr>
+              <td><code>0x03</code></td>
+              <td>ID Động cơ</td>
+              <td>1 byte không dấu</td>
+              <td><span class="badge badge-rw">RW</span></td>
+              <td><code>1</code> (<code>0x01</code>)</td>
+              <td>Địa chỉ ID trên bus (<code>0 .. 253</code>)</td>
+            </tr>
+            <tr>
+              <td><code>0x04</code></td>
+              <td>Tốc độ Baud</td>
+              <td>1 byte không dấu</td>
+              <td><span class="badge badge-rw">RW</span></td>
+              <td><code>1</code> (<code>0x01</code>)</td>
+              <td><code>Baud = 2,000,000 / (Giá trị + 1)</code> (Giá trị <code>1</code> = <code>1,000,000 bps</code>)
+              </td>
+            </tr>
+            <tr>
+              <td><code>0x05</code></td>
+              <td>Độ trễ phản hồi</td>
+              <td>1 byte không dấu</td>
+              <td><span class="badge badge-rw">RW</span></td>
+              <td><code>250</code> (<code>0xFA</code>)</td>
+              <td>Thời gian chờ trước khi Driver phát gói phản hồi: <code>Giá trị &times; 2 &mu;s</code>
+                (<code>250</code> = <code>500 &mu;s</code>)</td>
+            </tr>
+            <tr>
+              <td><code>0x06..0x07</code></td>
+              <td>Giới hạn góc tối thiểu</td>
+              <td>2 byte có dấu</td>
+              <td><span class="badge badge-rw">RW</span></td>
+              <td><code>-32768</code></td>
+              <td>Giới hạn góc nhỏ nhất (<code>16384 counts/vòng trục ra</code>)</td>
+            </tr>
+            <tr>
+              <td><code>0x08..0x09</code></td>
+              <td>Giới hạn góc tối đa</td>
+              <td>2 byte có dấu</td>
+              <td><span class="badge badge-rw">RW</span></td>
+              <td><code>+32767</code></td>
+              <td>Giới hạn góc lớn nhất (<code>16384 counts/vòng trục ra</code>)</td>
+            </tr>
+            <tr>
+              <td><code>0x0B</code></td>
+              <td>Ngưỡng quá nhiệt</td>
+              <td>1 byte không dấu</td>
+              <td><span class="badge badge-rw">RW</span></td>
+              <td><code>70</code> (<code>0x46</code>)</td>
+              <td>Nhiệt độ tối đa cho phép (<code>1 đơn vị = 1 &deg;C</code>)</td>
+            </tr>
+            <tr>
+              <td><code>0x0C</code></td>
+              <td>Ngưỡng điện áp thấp</td>
+              <td>1 byte không dấu</td>
+              <td><span class="badge badge-rw">RW</span></td>
+              <td><code>60</code> (<code>0x3C</code>)</td>
+              <td>Điện áp tối thiểu (<code>1 đơn vị = 0.1 V</code>, mặc định <code>60</code> = <code>6.0 V</code>)</td>
+            </tr>
+            <tr>
+              <td><code>0x0D</code></td>
+              <td>Ngưỡng điện áp cao</td>
+              <td>1 byte không dấu</td>
+              <td><span class="badge badge-rw">RW</span></td>
+              <td><code>160</code> (<code>0xA0</code>)</td>
+              <td>Điện áp tối đa (<code>1 đơn vị = 0.1 V</code>, mặc định <code>160</code> = <code>16.0 V</code>)</td>
+            </tr>
+            <tr>
+              <td><code>0x10</code></td>
+              <td>Mức phản hồi Status</td>
+              <td>1 byte không dấu</td>
+              <td><span class="badge badge-rw">RW</span></td>
+              <td><code>2</code></td>
+              <td><code>0</code>: Chỉ PING, <code>1</code>: PING &amp; READ, <code>2</code>: Phản hồi mọi lệnh</td>
+            </tr>
+            <tr>
+              <td><code>0x12</code></td>
+              <td>Bảo vệ ngắt lực</td>
+              <td>1 byte không dấu</td>
+              <td><span class="badge badge-rw">RW</span></td>
+              <td><code>0x24</code></td>
+              <td>Mặt nạ các cờ lỗi kích hoạt tự động ngắt lực giữ (Bit 2 Quá nhiệt + Bit 5 Quá tải)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>4.2. Vùng RAM (<code>0x18 .. 0x35</code>) — Điều khiển &amp; Phản hồi thời gian thực</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 12%;">Địa chỉ</th>
+              <th style="width: 22%;">Tên thanh ghi</th>
+              <th style="width: 16%;">Kích thước &amp; Dấu</th>
+              <th style="width: 8%;">Quyền</th>
+              <th style="width: 12%;">Mặc định</th>
+              <th>Đơn vị chuẩn tại Trục ra &amp; Mô tả chi tiết</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>0x18</code></td>
+              <td>Bật/Tắt Lực giữ</td>
+              <td>1 byte không dấu</td>
+              <td><span class="badge badge-rw">RW</span></td>
+              <td><code>0</code></td>
+              <td><code>0</code>: Thả lỏng trục động cơ tự do<br /><code>1</code>: Bật điều khiển giữ lực</td>
+            </tr>
+            <tr>
+              <td><code>0x19</code></td>
+              <td>Hiệu chuẩn (Calibration)</td>
+              <td>1 byte không dấu</td>
+              <td><span class="badge badge-rw">RW</span></td>
+              <td><code>0</code></td>
+              <td>Ghi <code>1</code> để chạy tự động cân chỉnh cảm biến dòng và góc 0 từ trường (NOTE: chỉ sử dụng khi hiệu chuẩn động cơ không tải -> Master không sử dụng bản tin này)</td>
+            </tr>
+            <tr class="highlight-row">
+              <td><code>0x1A..0x1B</code></td>
+              <td><strong>Độ cứng Kp</strong></td>
+              <td>2 byte không dấu<br />(<code>0 .. 65535</code>)</td>
+              <td><span class="badge badge-rw">RW</span></td>
+              <td><strong><code>10000</code></strong></td>
+              <td><strong>Độ cứng lò xo ảo tại trục ra (<code>1 đơn vị = 0.001 N&middot;m/rad</code>)</strong><br />
+                &bull; Giá trị thanh ghi = <code>Kp [N&middot;m/rad] &times; 1000</code><br />
+                &bull; Mặc định: <code>10000</code> (tương ứng <code>10.000 N&middot;m/rad</code>)<br />
+                &bull; Dải cho phép: <code>0 .. Kp_max</code> (đọc tại thanh ghi <code>0x32..0x33</code>; ghi vượt ngưỡng sẽ bị từ chối và báo cờ lỗi <code>0x08</code>)</td>
+            </tr>
+            <tr class="highlight-row">
+              <td><code>0x1C..0x1D</code></td>
+              <td><strong>Giảm chấn Kd</strong></td>
+              <td>2 byte không dấu<br />(<code>0 .. 65535</code>)</td>
+              <td><span class="badge badge-rw">RW</span></td>
+              <td><strong><code>36</code></strong></td>
+              <td><strong>Hệ số giảm chấn vận tốc tại trục ra
+                  (<code>1 đơn vị = 0.001 N&middot;m&middot;s/rad</code>)</strong><br />
+                &bull; Giá trị thanh ghi = <code>Kd [N&middot;m&middot;s/rad] &times; 1000</code><br />
+                &bull; Mặc định: <code>36</code> (tương ứng <code>0.036 N&middot;m&middot;s/rad</code>)<br />
+                &bull; Dải cho phép: <code>0 .. Kd_max</code> (đọc tại thanh ghi <code>0x34..0x35</code>; ghi vượt ngưỡng sẽ bị từ chối và báo cờ lỗi <code>0x08</code>)</td>
+            </tr>
+            <tr class="highlight-row">
+              <td><code>0x1E..0x1F</code></td>
+              <td><strong>Vị trí đích</strong></td>
+              <td>2 byte có dấu<br />(<code>-32768..+32767</code>)</td>
+              <td><span class="badge badge-rw">RW</span></td>
+              <td>Vị trí hiện tại</td>
+              <td><strong>Vị trí đích tại trục ra
+                  (<code>16384 counts = 1 vòng trục ra = 2&pi; rad = 360&deg;</code>)</strong><br />
+                &bull; Giá trị thanh ghi = <code>Góc đích [rad] &times; (16384 / 2&pi;)</code><br />
+                &bull; Dải đa vòng: <code>-32768 .. +32767</code> (&plusmn;2 vòng trục ra = &plusmn;720&deg;)</td>
+            </tr>
+            <tr class="highlight-row">
+              <td><code>0x20..0x21</code></td>
+              <td><strong>Vận tốc đích</strong></td>
+              <td>2 byte có dấu<br />(<code>-32768..+32767</code>)</td>
+              <td><span class="badge badge-rw">RW</span></td>
+              <td><code>0</code></td>
+              <td><strong>Vận tốc đích / Giới hạn tốc độ (<code>1 đơn vị = 1 RPM</code>)</strong><br />
+                &bull; Trong Mode 3 (MIT): Vận tốc đích (thường đặt <code>= 0</code> khi giữ góc)<br />
+                &bull; Trong Mode 2 (Position): Tốc độ quay tối đa tới đích (<code>0</code> = mặc định
+                <code>200 RPM</code>)
+              </td>
+            </tr>
+            <tr class="highlight-row">
+              <td><code>0x22..0x23</code></td>
+              <td><strong>Mô-men bù tiến (&tau;<sub>ff</sub>)</strong></td>
+              <td>2 byte có dấu<br />(<code>-32768..+32767</code>)</td>
+              <td><span class="badge badge-rw">RW</span></td>
+              <td><code>0</code></td>
+              <td><strong>Mô-men bù tiến tại trục ra
+                  (<code>1 đơn vị = 0.001 N&middot;m = 1 mN&middot;m</code>)</strong><br />
+                &bull; Giá trị thanh ghi = <code>Mô-men bù [N&middot;m] &times; 1000</code><br />
+                &bull; Dải biểu diễn: <code>-32768 .. +32767</code> (<code>-32.768 .. +32.767 N&middot;m</code>, giới
+                hạn theo mô-men định mức của từng khớp)</td>
+            </tr>
+            <tr>
+              <td><code>0x24..0x25</code></td>
+              <td><strong>Vị trí hiện tại</strong></td>
+              <td>2 byte có dấu<br />(<code>-32768..+32767</code>)</td>
+              <td><span class="badge badge-ro">R</span></td>
+              <td>—</td>
+              <td><strong>Vị trí thực tế tại trục ra (<code>16384 counts = 1 vòng = 2&pi; rad</code>)</strong><br />
+                <em>(Luôn được trả kèm tại Byte 5..6 của mọi gói Phản hồi)</em>
+              </td>
+            </tr>
+            <tr>
+              <td><code>0x26..0x27</code></td>
+              <td><strong>Vận tốc hiện tại</strong></td>
+              <td>2 byte có dấu</td>
+              <td><span class="badge badge-ro">R</span></td>
+              <td>—</td>
+              <td>Vận tốc thực tế (<code>1 đơn vị = 1 RPM</code>, có dấu theo chiều quay)</td>
+            </tr>
+            <tr>
+              <td><code>0x28..0x29</code></td>
+              <td><strong>Dòng điện tiêu thụ</strong></td>
+              <td>2 byte có dấu</td>
+              <td><span class="badge badge-ro">R</span></td>
+              <td>—</td>
+              <td>Dòng điện tiêu thụ tổng (<code>1 đơn vị = 1 mA</code>)</td>
+            </tr>
+            <tr>
+              <td><code>0x2A</code></td>
+              <td>Điện áp hiện tại</td>
+              <td>1 byte không dấu</td>
+              <td><span class="badge badge-ro">R</span></td>
+              <td>—</td>
+              <td>Điện áp nguồn DC Bus (<code>1 đơn vị = 0.1 V</code>, ví dụ <code>120</code> = <code>12.0 V</code>)
+              </td>
+            </tr>
+            <tr>
+              <td><code>0x2B</code></td>
+              <td>Nhiệt độ hiện tại</td>
+              <td>1 byte không dấu</td>
+              <td><span class="badge badge-ro">R</span></td>
+              <td>—</td>
+              <td>Nhiệt độ bo mạch (<code>1 đơn vị = 1 &deg;C</code>)</td>
+            </tr>
+            <tr>
+              <td><code>0x2C</code></td>
+              <td>Cờ lệnh chờ</td>
+              <td>1 byte không dấu</td>
+              <td><span class="badge badge-ro">R</span></td>
+              <td><code>0</code></td>
+              <td>Bằng <code>1</code> khi có lệnh <code>REG_WRITE</code> đang chờ kích hoạt <code>ACTION</code></td>
+            </tr>
+            <tr>
+              <td><code>0x2D</code></td>
+              <td><strong>Chế độ điều khiển</strong></td>
+              <td>1 byte không dấu</td>
+              <td><span class="badge badge-rw">RW</span></td>
+              <td><strong><code>3</code></strong></td>
+              <td><code>2</code>: Chế độ Vị trí đa vòng (Position Mode)<br />
+                <strong><code>3</code>: Chế độ MIT / Impedance Mode (Mặc định khi cấp nguồn)</strong>
+              </td>
+            </tr>
+            <tr>
+              <td><code>0x2E</code></td>
+              <td>Cờ đang di chuyển</td>
+              <td>1 byte không dấu</td>
+              <td><span class="badge badge-ro">R</span></td>
+              <td><code>0</code></td>
+              <td>Bằng <code>1</code> khi động cơ đang quay tới đích trong Mode 2</td>
+            </tr>
+            <tr>
+              <td><code>0x2F</code></td>
+              <td>Khóa EEPROM</td>
+              <td>1 byte không dấu</td>
+              <td><span class="badge badge-rw">RW</span></td>
+              <td><code>0</code></td>
+              <td><code>0</code>: Cho phép ghi EEPROM, <code>1</code>: Khóa ghi vùng EEPROM (<code>0x00..0x17</code>)
+              </td>
+            </tr>
+            <tr>
+              <td><code>0x30..0x31</code></td>
+              <td>Dòng khởi động (Punch)</td>
+              <td>2 byte không dấu</td>
+              <td><span class="badge badge-rw">RW</span></td>
+              <td><code>32</code> (<code>0x0020</code>)</td>
+              <td>Bù dòng thắng ma sát tĩnh trong Mode 2</td>
+            </tr>
+            
+              <td><code>0x32..0x33</code></td>
+              <td><strong>Độ cứng tối đa (Kp_max)</strong></td>
+              <td>2 byte không dấu<br />(<code>0 .. 65535</code>)</td>
+              <td><span class="badge badge-ro">R</span></td>
+              <td>Theo từng loại động cơ</td>
+              <td><strong>Giới hạn trên của độ cứng <code>Kp</code> tại trục ra (<code>1 đơn vị = 0.001 N&middot;m/rad</code>)</strong><br />
+                &bull; Được định nghĩa cố định theo từng mã động cơ/khớp trong firmware<br />
+                &bull; Mọi lệnh ghi <code>Kp &gt; Kp_max</code> sẽ bị từ chối (giữ nguyên giá trị <code>Kp</code> cũ và bật cờ lỗi <code>0x08</code>)</td>
+            
+            <tr>
+              <td><code>0x34..0x35</code></td>
+              <td><strong>Giảm chấn tối đa (Kd_max)</strong></td>
+              <td>2 byte không dấu<br />(<code>0 .. 65535</code>)</td>
+              <td><span class="badge badge-ro">R</span></td>
+              <td>Theo từng loại động cơ</td>
+              <td><strong>Giới hạn trên của hệ số giảm chấn <code>Kd</code> tại trục ra (<code>1 đơn vị = 0.001 N&middot;m&middot;s/rad</code>)</strong><br />
+                &bull; Được định nghĩa cố định theo từng mã động cơ/khớp trong firmware<br />
+                &bull; Mọi lệnh ghi <code>Kd &gt; Kd_max</code> sẽ bị từ chối (giữ nguyên giá trị <code>Kd</code> cũ và bật cờ lỗi <code>0x08</code>)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 5: UNIFIED CONTROL BLOCK -->
+    <section id="sec-5" class="section-card">
+      <div class="section-title">
+        <span class="section-num">5</span>
+        <span>CƠ CHẾ GHI KHỐI ĐIỀU KHIỂN (<code>0x1A .. 0x23</code>)</span>
+      </div>
+
+      <p>Năm thông số điều khiển được xếp liên tiếp thành một khối 10 byte từ địa chỉ <code>0x1A</code> đến
+        <code>0x23</code>:
+      </p>
+
+      <div class="packet-diagram">
+        <div class="pkt-cell pos-highlight">
+          <div class="byte-idx">0x1A .. 0x1B</div>
+          <div class="field-name">Kp_L, Kp_H</div>
+          <div class="field-val">0.001 N&middot;m/rad</div>
+        </div>
+        <div class="pkt-cell pos-highlight">
+          <div class="byte-idx">0x1C .. 0x1D</div>
+          <div class="field-name">Kd_L, Kd_H</div>
+          <div class="field-val">0.001 N&middot;m&middot;s/rad</div>
+        </div>
+        <div class="pkt-cell pos-highlight">
+          <div class="byte-idx">0x1E .. 0x1F</div>
+          <div class="field-name">Pos_L, Pos_H</div>
+          <div class="field-val">16384 counts / 2&pi;</div>
+        </div>
+        <div class="pkt-cell pos-highlight">
+          <div class="byte-idx">0x20 .. 0x21</div>
+          <div class="field-name">Spd_L, Spd_H</div>
+          <div class="field-val">1 RPM</div>
+        </div>
+        <div class="pkt-cell pos-highlight">
+          <div class="byte-idx">0x22 .. 0x23</div>
+          <div class="field-name">Tau_L, Tau_H</div>
+          <div class="field-val">0.001 N&middot;m</div>
+        </div>
+      </div>
+
+      <h3>5.1. Ghi đầy đủ 10 byte (Từ địa chỉ <code>0x1A</code>, tổng khung 17 byte)</h3>
+      <ul class="detail-list">
+        <li><strong>Mã lệnh (<code>Instruction</code>)</strong>: <code>0x03</code> (<code>WRITE_DATA</code>)</li>
+        <li><strong>Địa chỉ bắt đầu (<code>Param 1</code>)</strong>: <code>0x1A</code></li>
+        <li><strong>Độ dài (<code>Length</code>)</strong>: <code>0x0D</code> (10 byte dữ liệu + 3 = 13)</li>
+        <li><strong>Hành vi của Driver</strong>: Cập nhật đồng thời cả 5 thông số (<code>Kp</code>, <code>Kd</code>, Vị
+          trí đích, Vận tốc đích, Mô-men bù tiến) và tự động bật lực giữ (<code>0x18 = 1</code>).</li>
+      </ul>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Byte 0..1</th>
+              <th>Byte 2</th>
+              <th>Byte 3</th>
+              <th>Byte 4</th>
+              <th>Byte 5</th>
+              <th>Byte 6..7</th>
+              <th>Byte 8..9</th>
+              <th>Byte 10..11</th>
+              <th>Byte 12..13</th>
+              <th>Byte 14..15</th>
+              <th>Byte 16</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>FF FF</code></td>
+              <td><code>ID</code></td>
+              <td><code>0x0D</code></td>
+              <td><code>0x03</code></td>
+              <td><code>0x1A</code></td>
+              <td><code>Kp_L, Kp_H</code></td>
+              <td><code>Kd_L, Kd_H</code></td>
+              <td><code>Pos_L, Pos_H</code></td>
+              <td><code>Spd_L, Spd_H</code></td>
+              <td><code>Tau_L, Tau_H</code></td>
+              <td><code>CheckSum</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>5.2. Ghi rút gọn một phần (2, 4, 6, hoặc 8 byte)</h3>
+      <p>Khi một số thông số (như <code>Kp</code>, <code>Kd</code>) không cần thay đổi ở mỗi chu kỳ, Master có thể chỉ
+        ghi các cặp thanh ghi cần thiết để giảm độ dài gói tin:</p>
+      <ul class="detail-list">
+        <li><strong>Ghi 6 byte (Vị trí đích + Vận tốc đích + Mô-men bù tiến) từ địa chỉ <code>0x1E</code>
+            (<code>Length = 0x09</code>, tổng khung 13 byte)</strong>: Giữ nguyên <code>Kp, Kd</code> đang có, cập nhật
+          3 thông số còn lại và tự động bật lực giữ.</li>
+        <li><strong>Ghi 4 byte (Vị trí đích + Vận tốc đích) từ địa chỉ <code>0x1E</code> (<code>Length = 0x07</code>,
+            tổng khung 11 byte)</strong>: Giữ nguyên <code>Kp, Kd, &tau;<sub>ff</sub></code>, cập nhật vị trí đích + vận
+          tốc đích và tự động bật lực giữ.</li>
+        <li><strong>Ghi 2 byte chỉ đổi Vị trí đích từ địa chỉ <code>0x1E</code> (<code>Length = 0x05</code>, tổng khung
+            9 byte)</strong>: Giữ nguyên <code>Kp, Kd</code>, vận tốc đích và <code>&tau;<sub>ff</sub></code>, chỉ cập
+          nhật vị trí đích mới và tự động bật lực giữ.</li>
+        <li><strong>Ghi 2 byte hoặc 4 byte cấu hình trước <code>Kp, Kd</code> từ địa chỉ <code>0x1A</code>
+            (<code>Length = 0x05</code> hoặc <code>0x07</code>)</strong>: Chỉ nạp hệ số độ cứng và giảm chấn mới vào
+          Driver, <strong>không</strong> tự động bật lực giữ.</li>
+      </ul>
+
+      <div class="callout amber">
+        <strong>Quy tắc toàn vẹn 16-bit:</strong> Mọi thanh ghi 2 byte phải luôn được ghi đủ cả cặp Byte Thấp và Byte
+        Cao. Khi gói lệnh có chứa Vị trí đích (<code>0x1E..0x1F</code>), Driver luôn chốt các tham số
+        <code>Kp, Kd</code>, vận tốc đích, <code>&tau;<sub>ff</sub></code> đi kèm trước, sau đó kiểm tra điều kiện giới
+        hạn góc rồi mới kích hoạt vị trí đích.
+      </div>
+
+      <h3>5.3. Phương pháp tính toán ngưỡng giới hạn <code>Kp_max</code> (<code>0x32..0x33</code>) và <code>Kd_max</code> (<code>0x34..0x35</code>)</h3>
+      <p>Mỗi chủng loại động cơ khớp có quán tính rotor, tỉ số truyền hộp số và mô-men xoắn cực đại khác nhau. Hai thanh
+        ghi chỉ đọc <code>Kp_max</code> và <code>Kd_max</code> được xác định theo thông số vật lý quy đổi ra <strong>trục
+          ra sau hộp số (Output Shaft)</strong> như sau:</p>
+
+      <ul class="detail-list">
+        <li><strong>1. Quy đổi thông số vật lý ra trục ngoài (với tỉ số truyền hộp số <code>i</code>):</strong>
+          <ul>
+            <li>Mô-men cực đại tại trục ra: <code>&tau;<sub>out,max</sub> = K<sub>t,rotor</sub> &times; I<sub>max</sub> &times; i &times; &eta;</code> (<code>N&middot;m</code>)</li>
+            <li>Mô-men quán tính quy đổi ra trục ra: <code>J<sub>out</sub> = J<sub>rotor</sub> &times; i<sup>2</sup></code> (<code>kg&middot;m<sup>2</sup></code>)</li>
+          </ul>
+        </li>
+        <li><strong>2. Công thức xác định <code>Kp_max</code> (Theo giới hạn bão hòa mô-men xoắn):</strong><br />
+          Chọn góc lệch tối đa <code>&Delta;&theta;<sub>sat</sub></code> (thường <code>0.05 &ndash; 0.1 rad</code>, tương ứng <code>2.8&deg; &ndash; 5.7&deg;</code>) mà tại đó khớp phát huy <code>100%</code> mô-men cực đại <code>&tau;<sub>out,max</sub></code>:
+          <div style="margin:6px 0;padding:8px 12px;background:var(--bg-subtle);border-left:3px solid var(--primary);border-radius:4px;font-family:var(--font-mono);font-size:13px"><strong>Kp_max [N&middot;m/rad] = &tau;<sub>out,max</sub> / &Delta;&theta;<sub>sat</sub></strong> &nbsp;&rArr;&nbsp; Giá trị thanh ghi (<code>0x32..0x33</code>) = <code>round(Kp_max &times; 1000)</code></div>
+          <em>(Nếu đặt <code>Kp &gt; Kp_max</code>, chỉ một sai lệch góc rất nhỏ đã làm dòng điều khiển bão hòa cứng, gây mất tính đàn hồi tuyến tính và dễ tự kích rung quanh vị trí đích).</em>
+        </li>
+        <li><strong>3. Công thức xác định <code>Kd_max</code> (Theo điều kiện tắt dần bậc hai &amp; giới hạn nhiễu lượng tử hóa vận tốc):</strong><br />
+          Xét hệ dao động cơ học bậc hai với hệ số tắt dần mục tiêu <code>&zeta; &approx; 0.6 &ndash; 0.8</code> tại độ cứng cực đại <code>Kp_max</code>, đồng thời bị chặn trên bởi tần số cắt <code>&omega;<sub>c</sub> = 2&pi; &times; f<sub>c</sub></code> của bộ lọc vận tốc rời rạc:
+          <div style="margin:6px 0;padding:8px 12px;background:var(--bg-subtle);border-left:3px solid var(--primary);border-radius:4px;font-family:var(--font-mono);font-size:13px"><strong>Kd_max [N&middot;m&middot;s/rad] = min( 2 &times; &zeta; &times; &radic;(J<sub>out</sub> &times; Kp_max) , &nbsp;0.5 &times; J<sub>out</sub> &times; &omega;<sub>c</sub> )</strong> &nbsp;&rArr;&nbsp; Giá trị thanh ghi (<code>0x34..0x35</code>) = <code>round(Kd_max &times; 1000)</code></div>
+          <em>(Nếu đặt <code>Kd &gt; Kd_max</code>, mỗi bước nhảy lượng tử hóa vận tốc từ cảm biến góc rời rạc sẽ bị khuếch đại thành gai dòng điện làm trục động cơ kêu rít/gằn cao tần ngay cả khi đứng yên).</em>
+        </li>
+      </ul>
+    </section>
+
+    <!-- SECTION 6: SYNC WRITE -->
+    <section id="sec-6" class="section-card">
+      <div class="section-title">
+        <span class="section-num">6</span>
+        <span>CẤU TRÚC LỆNH ĐỒNG BỘ NHIỀU ĐỘNG CƠ (<code>SYNC_WRITE 0x83</code>)</span>
+      </div>
+
+      <p>Dùng khi Master điều khiển đồng thời <code>K</code> động cơ trên cùng một bus trong một khung truyền duy nhất
+        (sử dụng ID Quảng bá <code>0xFE</code>, không có gói phản hồi trả về):</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Thứ tự Byte</th>
+              <th>Tên trường</th>
+              <th>Giá trị / Công thức</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Byte 0..1</strong></td>
+              <td>Header</td>
+              <td><code>0xFF 0xFF</code></td>
+            </tr>
+            <tr>
+              <td><strong>Byte 2</strong></td>
+              <td>ID</td>
+              <td><code>0xFE</code> (ID Quảng bá)</td>
+            </tr>
+            <tr>
+              <td><strong>Byte 3</strong></td>
+              <td>Length</td>
+              <td><code>(L + 1) &times; K + 4</code> (với <code>L</code> là số byte dữ liệu mỗi động cơ, <code>K</code>
+                là số động cơ)</td>
+            </tr>
+            <tr>
+              <td><strong>Byte 4</strong></td>
+              <td>Instruction</td>
+              <td><code>0x83</code> (<code>SYNC_WRITE</code>)</td>
+            </tr>
+            <tr>
+              <td><strong>Byte 5</strong></td>
+              <td>Param 1 (Địa chỉ bắt đầu)</td>
+              <td>Ví dụ: <code>0x1A</code> (nếu ghi 10 byte/động cơ) hoặc <code>0x1E</code> (nếu ghi 6 byte/động cơ)
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Byte 6</strong></td>
+              <td>Param 2 (Độ dài dữ liệu <code>L</code>)</td>
+              <td>Số byte dữ liệu ghi cho mỗi động cơ (ví dụ <code>0x0A</code> = 10 byte)</td>
+            </tr>
+            <tr>
+              <td><strong>Khối 1 .. Khối K</strong></td>
+              <td>Dữ liệu từng động cơ</td>
+              <td>Mỗi khối gồm <code>1 byte ID</code> + <code>L byte dữ liệu</code> của động cơ đó</td>
+            </tr>
+            <tr>
+              <td><strong>Byte cuối</strong></td>
+              <td>CheckSum</td>
+              <td>Đảo bit tổng từ Byte 2 đến hết khối dữ liệu thứ <code>K</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 7: HEX EXAMPLES -->
+    <section id="sec-7" class="section-card">
+      <div class="section-title">
+        <span class="section-num">7</span>
+        <span>VÍ DỤ CÁC BẢN TIN HEX THỰC TẾ</span>
+      </div>
+
+      <div class="hex-example">
+        <h4>7.1. Điều khiển MIT Mode đầy đủ 10 byte (<code>0x1A..0x23</code>, Động cơ ID = <code>0x01</code>)</h4>
+        <p>
+          Đặt <code>Kp = 10.0 N&middot;m/rad</code> (<code>10000 = 0x2710</code> &rarr; <code>10 27</code>),
+          <code>Kd = 0.036 N&middot;m&middot;s/rad</code> (<code>36 = 0x0024</code> &rarr; <code>24 00</code>),
+          Vị trí đích <code>= +90&deg;</code> (<code>4096 counts = 0x1000</code> &rarr; <code>00 10</code>),
+          Vận tốc đích <code>= 0 RPM</code> (<code>00 00</code>),
+          Mô-men bù tiến <code>= 0 N&middot;m</code> (<code>00 00</code>):
+        </p>
+        <div class="hex-line">
+          <span class="dir-tag dir-tx">TX (17 byte)</span>
+          <span class="hex-bytes">FF FF 01 0D 03 1A 10 27 24 00 00 10 00 00 00 00 <span class="hl-cs">64</span></span>
+        </div>
+        <div class="hex-line">
+          <span class="dir-tag dir-rx">RX (11 byte)</span>
+          <span class="hex-bytes">FF FF 01 07 00 <span class="hl-pos">00 10</span> 0D 03 1A <span
+              class="hl-cs">BD</span></span>
+        </div>
+        <p style="margin-top: 8px; margin-bottom: 0; font-size: 13px; color: #475569;">
+          &rarr; Giải mã gói RX: <code>Status = 0x00</code> (Không lỗi), Byte 5..6 gạch chân màu xanh <code>00 10</code>
+          là vị trí hiện tại <code>0x1000 = 4096 counts (+90&deg;)</code>, <code>CheckSum = 0xBD</code>.
+        </p>
+      </div>
+
+      <div class="hex-example">
+        <h4>7.2. Ghi rút gọn 2 byte Vị trí đích (<code>0x1E..0x1F</code>, giữ nguyên <code>Kp, Kd</code>, vận tốc đích,
+          <code>&tau;<sub>ff</sub></code>)
+        </h4>
+        <p>Đặt Vị trí đích <code>= +180&deg;</code> (<code>8192 counts = 0x2000</code> &rarr; Little-Endian:
+          <code>00 20</code>). Giả sử vị trí thực tế đang ở <code>8000 counts = 0x1F40</code> (<code>40 1F</code>):
+        </p>
+        <div class="hex-line">
+          <span class="dir-tag dir-tx">TX (9 byte)</span>
+          <span class="hex-bytes">FF FF 01 05 03 1E 00 20 <span class="hl-cs">B8</span></span>
+        </div>
+        <div class="hex-line">
+          <span class="dir-tag dir-rx">RX (11 byte)</span>
+          <span class="hex-bytes">FF FF 01 07 00 <span class="hl-pos">40 1F</span> 05 03 1E <span
+              class="hl-cs">72</span></span>
+        </div>
+      </div>
+
+      <div class="hex-example">
+        <h4>7.3. Đọc toàn bộ 8 byte Phản hồi trạng thái (<code>0x24..0x2B</code>: Vị trí, Vận tốc, Dòng điện, Điện áp,
+          Nhiệt độ)</h4>
+        <div class="hex-line">
+          <span class="dir-tag dir-tx">TX (8 byte)</span>
+          <span class="hex-bytes">FF FF 01 04 02 24 08 <span class="hl-cs">CC</span></span>
+        </div>
+        <div class="hex-line">
+          <span class="dir-tag dir-rx">RX (19 byte)</span>
+          <span class="hex-bytes">FF FF 01 0F [Status] <span class="hl-pos">[Pos_L Pos_H]</span> 04 02 24 [Pos_L Pos_H]
+            [Spd_L Spd_H] [Cur_L Cur_H] [Volt] [Temp] <span class="hl-cs">[CS]</span></span>
+        </div>
+      </div>
+
+      <div class="hex-example" style="margin-bottom: 0;">
+        <h4>7.4. Ngắt lực giữ — Thả lỏng trục động cơ (Ghi <code>0x00</code> vào thanh ghi <code>0x18</code>)</h4>
+        <div class="hex-line">
+          <span class="dir-tag dir-tx">TX (8 byte)</span>
+          <span class="hex-bytes">FF FF 01 04 03 18 00 <span class="hl-cs">DF</span></span>
+        </div>
+        <div class="hex-line">
+          <span class="dir-tag dir-rx">RX (11 byte)</span>
+          <span class="hex-bytes">FF FF 01 07 00 <span class="hl-pos">[Pos_L Pos_H]</span> 04 03 18 <span
+              class="hl-cs">[CS]</span></span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+</body>
+
+</html>

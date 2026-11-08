@@ -1,0 +1,8 @@
+device LCM32F037
+si SWD
+speed 4000
+connect
+loadfile Objects/Join_Controler_LCM32F037_V1.hex
+r
+g
+q
